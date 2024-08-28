@@ -47,10 +47,6 @@ public class EmprestimoLivro {
         this.dataDevolucao = dataDevolucao;
     }
     
-    public void calcularMulta(int diasAtrasados) {
-        //
-    }
-
     public void exibirDetalhesEmprestimo() {
         //
     }
