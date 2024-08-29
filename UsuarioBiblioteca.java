@@ -4,7 +4,7 @@ package POOII.BibliotecaJava;
 public class UsuarioBiblioteca extends Usuario {
 
 
-    //preciso criar um array de emprestimos??
+    //preciso criar um array de emprestimos
 
     public UsuarioBiblioteca(String nome, String CPF, String email){
         super(nome, CPF, email);
