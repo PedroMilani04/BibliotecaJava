@@ -11,9 +11,9 @@ public class Usuario {
     public Usuario(String nome, String email, String CPF) {
         this.nome = nome;
         this.email = email;
-        // if(CPF.length() != 11){
-        //     throw new IllegalArgumentException("CPF inválido"); //Bloqueia a criação do objeto por invalidez de CPF
-        // }
+        if(CPF.length() != 11){
+            throw new IllegalArgumentException("CPF inválido" + "Erro no ID: " + nextID); //Bloqueia a criação do objeto por invalidez de CPF, e informa o ID do objeto que deu erro
+        }
         this.CPF = CPF;
         this.ID = nextID++;
     }

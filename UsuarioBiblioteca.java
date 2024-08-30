@@ -6,8 +6,8 @@ public class UsuarioBiblioteca extends Usuario {
 
     //preciso criar um array de emprestimos
 
-    public UsuarioBiblioteca(String nome, String CPF, String email){
-        super(nome, CPF, email);
+    public UsuarioBiblioteca(String nome, String email, String CPF){
+        super(nome, email, CPF);
     }
 
     public int getID(){
