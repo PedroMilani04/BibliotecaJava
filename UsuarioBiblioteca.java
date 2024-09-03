@@ -14,10 +14,6 @@ public class UsuarioBiblioteca extends Usuario {
         return ID;
     }
 
-
-    ---
-
-    
     //exibir emprestimos
     //exibir multas
 
