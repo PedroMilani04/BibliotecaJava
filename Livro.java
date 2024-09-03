@@ -1,18 +1,16 @@
 public class Livro{
     private String titulo;
     private String autor;
-    private int isbn; 
-    //private int quantPag;
+    private String isbn; 
 
     public Livro(){
         
     }
 
-    public Livro(String titulo, String autor, int isbn, int quantPag){
+    public Livro(String titulo, String autor, String isbn){
         this.titulo = titulo;
         this.autor = autor;
         this.isbn = isbn;
-        //this.quantPag = quantPag;
     }
 
     public void setTitulo(String titulo){
@@ -23,13 +21,9 @@ public class Livro{
         this.autor = autor;
     }
 
-    public void setIsbn(int isbn){
+    public void setIsbn(String isbn){
         this.isbn = isbn;
     }
-
-    /*public void setQuantPag(int quantPag){
-        this.quantPag = quantPag;
-    }*/
 
     public String getTitulo(){
         return titulo;
@@ -39,11 +33,7 @@ public class Livro{
         return autor;
     }
 
-    public int getIsbn(){
+    public String getIsbn(){
         return isbn;
     }
-
-    /*public int getQuantPag(){
-        return quantPag;
-    }*/
 }
