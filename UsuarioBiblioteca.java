@@ -45,5 +45,16 @@ public class UsuarioBiblioteca extends Usuario {
             }
         }
 
+        public void devolverLivro(String titulo){
+            for(int i = 0; i < emprestimos.size(); i++){
+                if(emprestimos.get(i).getLivro().equals(titulo)){
+                    emprestimos.remove(i);
+                    Catalogo.devolverLivro(titulo);
+                    System.out.println("Livro devolvido com sucesso");
+                    return;
+                }
+            }
+            System.out.println("Livro não encontrado");
+        }
 
 }
