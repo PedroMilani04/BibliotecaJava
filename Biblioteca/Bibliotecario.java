@@ -1,4 +1,4 @@
-package POOII.BibliotecaJava;
+package Biblioteca;
 
 /**
  *

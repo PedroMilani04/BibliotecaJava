@@ -1,10 +1,11 @@
-package POOII.BibliotecaJava;
+package Biblioteca;
 
-import POOII.BibliotecaJava.Livro;
-import POOII.BibliotecaJava.EmprestimoLivro;
-import POOII.BibliotecaJava.Reserva;
-// import POOII.BibliotecaJava.Catalogo;
-import POOII.BibliotecaJava.Multa;
+import Biblioteca.Livro;
+import Biblioteca.EmprestimoLivro;
+import Biblioteca.Reserva;
+import Biblioteca.ReservaRecibo;
+// import Biblioteca.Catalogo;
+import Biblioteca.Multa;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.time.LocalDate;
@@ -15,7 +16,7 @@ public class UsuarioBiblioteca extends Usuario {
     protected boolean possuiMulta;
     //Arrays de emprestimos, reservas e multas. Ou seja, uma lista para cada um desses atributos
     protected ArrayList<EmprestimoLivro> emprestimos = new ArrayList<EmprestimoLivro>();
-    protected ArrayList<ReciboReserva> reservas = new ArrayList<ReciboReserva>();
+    protected ArrayList<ReservaRecibo> reservas = new ArrayList<ReservaRecibo>();
     protected ArrayList<Multa> multas = new ArrayList<Multa>();
     
 
@@ -33,7 +34,7 @@ public class UsuarioBiblioteca extends Usuario {
         return this.emprestimos; //Retorna o array por completo
     }
 
-    public ArrayList<Reserva> getReservas(int i){
+    public ArrayList<ReservaRecibo> getReservas(int i){
         return this.reservas; //Mesma coisa de cima
     }
 

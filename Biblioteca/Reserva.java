@@ -1,4 +1,4 @@
-package POOII.BibliotecaJava;
+package Biblioteca;
 
 // Gerencimaneto Reserva: possui metodos statics para que o usuario utilize
 // sendo possivel as seguintes funcionalidades

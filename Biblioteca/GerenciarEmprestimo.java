@@ -1,3 +1,4 @@
+package Biblioteca;
 public class GerenciarEmprestimo {
 
     private static GerenciarEmprestimo instancia;
