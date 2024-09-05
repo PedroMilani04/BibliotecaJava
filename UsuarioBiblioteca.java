@@ -4,6 +4,7 @@ import POOII.BibliotecaJava.Livro;
 import POOII.BibliotecaJava.EmprestimoLivro;
 import POOII.BibliotecaJava.Reserva;
 import POOII.BibliotecaJava.Catalogo;
+import POOII.BlibliotecaJava.Multa;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.time.LocalDate;
@@ -13,6 +14,7 @@ public class UsuarioBiblioteca extends Usuario {
     protected String endereco;
     protected ArrayList<EmprestimoLivro> emprestimos = new ArrayList<EmprestimoLivro>();
     protected ArrayList<Reserva> reservas = new ArrayList<Reserva>();
+    protected ArrayList<Multa> multas = new ArrayList<Multa>();
     
 
     public UsuarioBiblioteca(String nome, String email, String CPF){
@@ -22,6 +24,18 @@ public class UsuarioBiblioteca extends Usuario {
 
     public int getID(){
         return ID;
+    }
+
+    public ArrayList<EmprestimoLivro> getEmprestimos(){
+        return this.emprestimos;
+    }
+
+    public ArrayList<Reserva> getReservas(int i){
+        return this.reservas;
+    }
+
+    public ArrayList<Multa> getMultas(){
+        return this.multas;
     }
 
     public void setEndereco(String endereco){
