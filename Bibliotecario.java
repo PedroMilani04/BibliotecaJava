@@ -4,6 +4,9 @@ package POOII.BibliotecaJava;
  *
  * @author arthu
  */
+
+import java.util.ArrayList;
+
 public class Bibliotecario extends UsuarioBiblioteca{
     Bibliotecario(String nome, String email, String CPF)
     {
@@ -31,7 +34,7 @@ public class Bibliotecario extends UsuarioBiblioteca{
         {
             if(multaElemento.getCodMulta().equals(codMulta))
             {
-                multaProcurada.setPaga(true);
+                multaElemento.setPaga(true);
                 return true;
             }
         }
