@@ -1,4 +1,4 @@
-package com.mycompany.mavenproject2;
+package POOII.BibliotecaJava;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -21,6 +21,7 @@ public class Reserva {
     public Reserva( Livro livro, UsuarioBiblioteca usuario ) {
         this.livroReservado = livro;
         
+        
         arrayUsuarios = new ArrayList<UsuarioBiblioteca>();
         arrayUsuarios.add( usuario );
         
@@ -29,6 +30,10 @@ public class Reserva {
         
     }
 
+    public Livro getLivro(){
+        return this.livroReservado;
+    }
+    
     public void adicionarUsuarioReserva( UsuarioBiblioteca usuario ){
         arrayUsuarios.add(usuario);
         arrayTempo.add( LocalDate.now() );

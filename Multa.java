@@ -3,11 +3,11 @@ import java.time.LocalDate;
 
 public class Multa{
     //atributos da multa
-    private String codMulta;
-    private String idUsuario;
-    private LocalDate dataExpedicao;
-    private double valor;
-    private boolean paga;
+    protected String codMulta;
+    protected String idUsuario;
+    protected LocalDate dataExpedicao;
+    protected double valor;
+    protected boolean paga;
     
 
     //construtor

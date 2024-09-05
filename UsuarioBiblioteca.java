@@ -12,7 +12,7 @@ import java.time.LocalDate;
 
 public class UsuarioBiblioteca extends Usuario {
     protected String endereco;
-
+    protected boolean possuiMulta;
     //Arrays de emprestimos, reservas e multas. Ou seja, uma lista para cada um desses atributos
     protected ArrayList<EmprestimoLivro> emprestimos = new ArrayList<EmprestimoLivro>();
     protected ArrayList<ReciboReserva> reservas = new ArrayList<ReciboReserva>();
@@ -22,6 +22,7 @@ public class UsuarioBiblioteca extends Usuario {
     public UsuarioBiblioteca(String nome, String email, String CPF){
         super(nome, email, CPF);
         this.endereco = endereco;
+        this.possuiMulta = false;
     }
 
     public int getID(){
