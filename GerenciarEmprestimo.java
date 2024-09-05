@@ -27,3 +27,6 @@ public class GerenciarEmprestimo {
         return null;
     }
 }
+
+// uso: GerenciarEmprestimo gerenciador = GerenciarEmprestimo.getInstancia();
+
