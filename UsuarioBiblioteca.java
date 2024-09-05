@@ -15,7 +15,7 @@ public class UsuarioBiblioteca extends Usuario {
 
     //Arrays de emprestimos, reservas e multas. Ou seja, uma lista para cada um desses atributos
     protected ArrayList<EmprestimoLivro> emprestimos = new ArrayList<EmprestimoLivro>();
-    protected ArrayList<Reserva> reservas = new ArrayList<Reserva>();
+    protected ArrayList<ReciboReserva> reservas = new ArrayList<ReciboReserva>();
     protected ArrayList<Multa> multas = new ArrayList<Multa>();
     
 
