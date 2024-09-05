@@ -1,5 +1,7 @@
 package Biblioteca;
 import java.time.LocalDate;
+import Biblioteca.Emprestimolivro;
+import Biblioteca.Usuario;
 
 public class Multa{
     //atributos da multa
@@ -7,16 +9,16 @@ public class Multa{
     protected String idUsuario;
     protected LocalDate dataExpedicao;
     protected double valor;
-    protected boolean paga;
+    protected boolean isPaga;
     
 
     //construtor
-    public Multa(String codMulta, String idUsuario, double valor, boolean paga) {
+    public Multa(String codMulta, String idUsuario, double valor, boolean isPaga) {
         this.codMulta = codMulta;
         this.idUsuario = idUsuario;
         this.dataExpedicao = LocalDate.now();
         this.valor = valor;
-        this.paga = false;
+        this.isPaga = false;
     }
 
     //getters e setters
@@ -49,15 +51,32 @@ public class Multa{
         this.valor = valor;
     }
     //paga
-    public boolean getPaga(){
-        return paga;
+    public boolean getisPaga(){
+        return isPaga;
     }
-    public boolean setPaga(boolean paga){
-        this.paga = paga;
+    public boolean setisPaga(boolean isPaga){
+        this.isPaga = isPaga;
     }
     
-    // Método para mostrar as informações da Multa
-    public void exibirDados() {
-        System.out.println("codMulta: "+codMulta+"idUsuario: "+idUsuario+"valor: "+valor+"paga: "+paga+"dataExpedicao: "+dataExpedicao);
+    //método para gerar uma multa
+    public  Multa gerarMulta(EmprestimoLivro emprestimoLivro) {
+        if (emprestimoLivro.isEmprestimoAtrasado()) {
+            LocalDate dataExpedicao = LocalDate.now();
+            valorMulta = 3,5;
+            codMulta = "M-" + emprestimoLivro.getUsuario() + "-" + dataAtual.toString();
+            return new Multa(codMulta, emprestimoLivro.getIdUsuario(), valorMulta, false);
+        }
+        return null;
     }
+    
+    //método para quitar uma multa
+    public void quitarMulta() {
+        if (!this.isPaga) {
+            this.isPaga = true;
+            System.out.println("Multa " + this.codMulta + " foi paga.");
+        } else {
+            System.out.println("A multa " + this.codMulta + " já está paga.");
+        }
+    }
+    
 }
