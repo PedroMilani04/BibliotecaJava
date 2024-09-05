@@ -10,8 +10,8 @@ import java.util.ArrayList;
  */
 public class Reserva {
 
-    private ArrayList<Livro> livroReservados = new ArrayList<Livro>();
-    private int numeroLivroReservados;
+    private Livro livroReservado;
+    private ArrayList<UsuarioBiblioteca>;
     
     public boolean reservarLivro(Livro livro){ // adicionado = true, ja ter na reserva = false
         for( int contador = 0; contador < numeroLivroReservados; contador ++){
