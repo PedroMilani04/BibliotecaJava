@@ -1,19 +1,21 @@
-package Biblioteca;
 public class Livro{
     private String titulo;
     private String autor;
     private String isbn; 
-    private boolean disponibilidade;
-
+    private int tombo;
+    private EnumDisponibilidade disponibilidade;
+        
+    
     public Livro(){
-        this.disponibilidade = true;
+        this.disponibilidade = EnumDisponibilidade.DISPONIVEL;
     }
 
-    public Livro(String titulo, String autor, String isbn){
+    public Livro(String titulo, String autor, String isbn, int tombo){
         this.titulo = titulo;
         this.autor = autor;
         this.isbn = isbn;
-        this.disponibilidade = true;
+        this.tombo = tombo;
+        this.disponibilidade = EnumDisponibilidade.DISPONIVEL;
     }
 
     public void setTitulo(String titulo){
@@ -28,7 +30,11 @@ public class Livro{
         this.isbn = isbn;
     }
 
-    public void setDisponibilidade(boolean disponibilidade){
+    public void setTombo(int tombo){
+        this.tombo = tombo;
+    }
+
+    public void setDisponibilidade(EnumDisponibilidade disponibilidade){
         this.disponibilidade = disponibilidade;
     }
 
@@ -44,7 +50,11 @@ public class Livro{
         return isbn;
     }
 
-    public boolean getDisponibilidade(){
+    public int getTombo(){
+        return tombo;
+    }
+
+    public EnumDisponibilidade getDisponibilidade(){
         return disponibilidade;
     }
 }
