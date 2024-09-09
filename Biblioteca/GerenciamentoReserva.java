@@ -46,7 +46,6 @@ public class GerenciamentoReserva {
         for(int contador = 0; contador < gerenciadorReserva.size(); contador++ ){
             if( gerenciadorReserva.get(contador).getLivro().equals(livro) )
             {
-                livro.setDisponibilidade(EnumDisponibilidade.RESERVADO);
                 gerenciadorReserva.get(contador).adicionarUsuarioReserva(usuario);
                 // livro ja reservado
                 return recibo;
@@ -78,6 +77,10 @@ public class GerenciamentoReserva {
                 gerenciadorReserva.get(contador).checarSeUsuario(recibo.getUsuario()) )
             { // esse if checa se o recibo bate com o livro e se o livro tem reserva no nome do usuario
                 gerenciadorReserva.get(contador).retirarEspecificoUsuario(recibo.getUsuario());
+                if(gerenciadorReserva.get(contador).isVazio()){
+                    recibo.setDisponibilidade(EnumDisponibilidade.DISPONIVEL);
+                }
+                
                 return true;
                 // permitido com sucesso
             }

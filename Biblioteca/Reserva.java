@@ -89,6 +89,10 @@ public class Reserva {
     }
     
     
+    public boolean isVazio(){
+        return arrayUsuarios.isEmpty();
+    }
+    
     // provavelmente tudo aq em baixo é inutil, mas caso eu precise vou ta usando fds
     
     public UsuarioBiblioteca retirarProximoUsuario(){
