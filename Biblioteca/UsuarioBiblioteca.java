@@ -16,15 +16,18 @@ public class UsuarioBiblioteca extends Usuario {
     protected String endereco;
     protected boolean possuiMulta;
     //Arrays de emprestimos, reservas e multas. Ou seja, uma lista para cada um desses atributos
-    protected ArrayList<EmprestimoLivro> emprestimos = new ArrayList<EmprestimoLivro>();
-    protected ArrayList<ReservaRecibo> reservas = new ArrayList<ReservaRecibo>();
-    protected ArrayList<Multa> multas = new ArrayList<Multa>();
+    protected ArrayList<EmprestimoLivro> emprestimos;
+    protected ArrayList<ReservaRecibo> reservas;
+    protected ArrayList<Multa> multas;
     
 
     public UsuarioBiblioteca(String nome, String email, String CPF){
         super(nome, email, CPF);
         this.endereco = endereco;
         this.possuiMulta = false;
+        this.emprestimos = new ArrayList<EmprestimoLivro>();
+        this.reservas = new ArrayList<ReservaRecibo>();
+        this.multas = new ArrayList<Multa>();
         BancoUsuarios.adicionarUsuario(this);
     }
 
@@ -36,7 +39,7 @@ public class UsuarioBiblioteca extends Usuario {
         return this.emprestimos; //Retorna o array por completo
     }
 
-    public ArrayList<ReservaRecibo> getReservas(int i){
+    public ArrayList<ReservaRecibo> getReservas(){
         return this.reservas; //Mesma coisa de cima
     }
 
