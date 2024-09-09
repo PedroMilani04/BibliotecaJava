@@ -4,7 +4,8 @@ import Biblioteca.Livro;
 import Biblioteca.EmprestimoLivro;
 import Biblioteca.Reserva;
 import Biblioteca.ReservaRecibo;
-// import Biblioteca.Catalogo;
+import Biblioteca.BancoUsuarios;
+import Biblioteca.Catalogo; // Proximo a ser adc
 import Biblioteca.Multa;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -24,6 +25,7 @@ public class UsuarioBiblioteca extends Usuario {
         super(nome, email, CPF);
         this.endereco = endereco;
         this.possuiMulta = false;
+        BancoUsuarios.adicionarUsuario(this);
     }
 
     public int getID(){
