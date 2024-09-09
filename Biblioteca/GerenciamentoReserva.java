@@ -46,6 +46,7 @@ public class GerenciamentoReserva {
         for(int contador = 0; contador < gerenciadorReserva.size(); contador++ ){
             if( gerenciadorReserva.get(contador).getLivro().equals(livro) )
             {
+                livro.setDisponibilidade(EnumDisponibilidade.RESERVADO);
                 gerenciadorReserva.get(contador).adicionarUsuarioReserva(usuario);
                 // livro ja reservado
                 return recibo;
@@ -53,6 +54,7 @@ public class GerenciamentoReserva {
         }
         Reserva livroAReservar = new Reserva(livro, usuario);
         gerenciadorReserva.add(livroAReservar);
+        livro.setDisponibilidade(EnumDisponibilidade.RESERVADO);
         return recibo;
         // livro não reservado, logo o usuario é o primeiro
     }
