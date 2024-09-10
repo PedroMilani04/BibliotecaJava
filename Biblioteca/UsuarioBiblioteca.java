@@ -4,7 +4,8 @@ import Biblioteca.Livro;
 import Biblioteca.EmprestimoLivro;
 import Biblioteca.Reserva;
 import Biblioteca.ReservaRecibo;
-// import Biblioteca.Catalogo;
+import Biblioteca.BancoUsuarios;
+import Biblioteca.Catalogo; // Proximo a ser adc
 import Biblioteca.Multa;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -15,15 +16,19 @@ public class UsuarioBiblioteca extends Usuario {
     protected String endereco;
     protected boolean possuiMulta;
     //Arrays de emprestimos, reservas e multas. Ou seja, uma lista para cada um desses atributos
-    protected ArrayList<EmprestimoLivro> emprestimos = new ArrayList<EmprestimoLivro>();
-    protected ArrayList<ReservaRecibo> reservas = new ArrayList<ReservaRecibo>();
-    protected ArrayList<Multa> multas = new ArrayList<Multa>();
+    protected ArrayList<EmprestimoLivro> emprestimos;
+    protected ArrayList<ReservaRecibo> reservas;
+    protected ArrayList<Multa> multas;
     
 
     public UsuarioBiblioteca(String nome, String email, String CPF){
         super(nome, email, CPF);
         this.endereco = endereco;
         this.possuiMulta = false;
+        this.emprestimos = new ArrayList<EmprestimoLivro>();
+        this.reservas = new ArrayList<ReservaRecibo>();
+        this.multas = new ArrayList<Multa>();
+        BancoUsuarios.adicionarUsuario(this);
     }
 
     public int getID(){
@@ -34,7 +39,7 @@ public class UsuarioBiblioteca extends Usuario {
         return this.emprestimos; //Retorna o array por completo
     }
 
-    public ArrayList<ReservaRecibo> getReservas(int i){
+    public ArrayList<ReservaRecibo> getReservas(){
         return this.reservas; //Mesma coisa de cima
     }
 
@@ -51,22 +56,30 @@ public class UsuarioBiblioteca extends Usuario {
     }
 
         public void novoEmprestimo(String titulo){
-            Object volta =  Catalogo.getLivro(titulo); //Object para saber oq voltar, pode retornar um reserva ou emprestimo, pior caso NULL.
-            if(volta instanceof EmprestimoLivro){
-                EmprestimoLivro emprestimo = (EmprestimoLivro) volta; //Casting de volta para EmprestimoLivro, ou seja, afirmando que volta é um emprestimo
-                emprestimos.add(emprestimo); //Adiciona no array
-            }if(volta instanceof Reserva){
-                ReservaRecibo reserva = (ReservaRecibo) volta; //Mesma coisa de cima, mas com reserva
-                reservas.add(reserva); // adiciona no array
+            EmprestimoLivro volta = GerenciarEmprestimo.realizarEmprestimo(this, Catalogo.exibirLivroTitulo(titulo));//a função já diz por só propria o que faz
+            if(volta != null){
+                emprestimos.add(volta);
+                System.out.println("Emprestimo realizado com sucesso");
             }else{
-                System.out.println("Livro não encontrado");
+
+                System.out.println("Emprestimo não realizado");
+
+                //Preciso de uma função do catalogo pra saber o pq não houve emprestimo
             }
         }
 
+        public void novaReserva(String titulo){
+            ReservaRecibo volta = GerenciamentoReserva.AdicionarReservaLivro(Catalogo.exibirLivroTitulo(titulo), this);
+            reservas.add(volta);
+            System.out.println("Reserva realizada com sucesso");
+        }
+
+
+
         public void devolverLivro(String titulo){
             for(int i = 0; i < emprestimos.size(); i++){
-                if(emprestimos.get(i).getLivro().equals(titulo)){
-                    Catalogo.devolverLivro(i); //Deve remover do array lá no catalogo
+                if(emprestimos.get(i).getLivro().getTitulo().equals(titulo)){ //Se o livro for igual ao titulo passado 
+                    Catalogo.devolverLivro(emprestimos.get(i).getLivro()); //Deve remover do array lá no catalogo
                     emprestimos.remove(i); //remove do array
                     System.out.println("Livro devolvido com sucesso");
                     return;
