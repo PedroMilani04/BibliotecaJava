@@ -51,14 +51,14 @@ public class Bibliotecario extends UsuarioBiblioteca{
         return false;
     }
     
-    public void adicionarLivro(String titulo, String autor, String isbn)
+    public void inserirLivros(String titulo, String autor, String isbn)
     {
-        Catalogo.adicionarLivro(titulo, autor, isbn);
+        Catalogo.inserirLivros(titulo, autor, isbn);
     }
     
-    public void removerLivro(Livro excluirLivro)
+    public void excluirLivro(String isbn, int tombo)
     {
-        Catalogo.removerLivro(excluirLivro);
+        Catalogo.excluirLivro(isbn, tombo);
     }
     
     
