@@ -70,8 +70,8 @@ public class UsuarioBiblioteca extends Usuario {
 
         public void devolverLivro(String titulo){
             for(int i = 0; i < emprestimos.size(); i++){
-                if(emprestimos.get(i).getLivro().equals(titulo)){
-                    Catalogo.devolverLivro(i); //Deve remover do array lá no catalogo
+                if(emprestimos.get(i).getLivro().getTitulo().equals(titulo)){ //Se o livro for igual ao titulo passado 
+                    Catalogo.devolverLivro(emprestimos.get(i).getLivro()); //Deve remover do array lá no catalogo
                     emprestimos.remove(i); //remove do array
                     System.out.println("Livro devolvido com sucesso");
                     return;
