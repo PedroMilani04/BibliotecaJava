@@ -63,7 +63,7 @@ public class BancoUsuarios {
         return null;
     }
 
-    public static ArrayList<ReservaRecibo> getReservas(int idUsuario, String nomeLivroBuscado)
+    public static ArrayList<ReservaRecibo> getReservas(int idUsuario)
     {
         for(UsuarioBiblioteca usuarioElemento : usuarios)
         {

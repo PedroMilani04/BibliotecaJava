@@ -51,9 +51,9 @@ public class Bibliotecario extends UsuarioBiblioteca{
         return false;
     }
     
-    public void adicionarLivro(Livro novoLivro)
+    public void adicionarLivro(String titulo, String autor, String isbn)
     {
-        Catalogo.adicionarLivro(novoLivro);
+        Catalogo.adicionarLivro(titulo, autor, isbn);
     }
     
     public void removerLivro(Livro excluirLivro)
