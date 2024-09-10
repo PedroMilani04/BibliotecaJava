@@ -56,6 +56,7 @@ public class Multa{
     }
     public boolean setisPaga(boolean isPaga){
         this.isPaga = isPaga;
+        return true
     }
     
     //método para gerar uma multa
