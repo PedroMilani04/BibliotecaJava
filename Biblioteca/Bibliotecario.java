@@ -25,7 +25,7 @@ public class Bibliotecario extends UsuarioBiblioteca{
 
     public EmprestimoLivro getEmprestimo(int idUsuario, String nomeLivroBuscado)
     {
-        return BancoUsuarios.getEmprestimo(idUsuario, String nomeLivroBuscado);
+        return BancoUsuarios.getEmprestimo(idUsuario, nomeLivroBuscado);
     }
 
     public ArrayList<EmprestimoLivro> getEmprestimos(int idUsuario)
