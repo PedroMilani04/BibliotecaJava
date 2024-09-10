@@ -56,17 +56,25 @@ public class UsuarioBiblioteca extends Usuario {
     }
 
         public void novoEmprestimo(String titulo){
-            Object volta =  Catalogo.getLivro(titulo); //Object para saber oq voltar, pode retornar um reserva ou emprestimo, pior caso NULL.
-            if(volta instanceof EmprestimoLivro){
-                EmprestimoLivro emprestimo = (EmprestimoLivro) volta; //Casting de volta para EmprestimoLivro, ou seja, afirmando que volta é um emprestimo
-                emprestimos.add(emprestimo); //Adiciona no array
-            }if(volta instanceof Reserva){
-                ReservaRecibo reserva = (ReservaRecibo) volta; //Mesma coisa de cima, mas com reserva
-                reservas.add(reserva); // adiciona no array
+            EmprestimoLivro volta = GerenciarEmprestimo.realizarEmprestimo(this, Catalogo.exibirLivroTitulo(titulo));//a função já diz por só propria o que faz
+            if(volta != null){
+                emprestimos.add(volta);
+                System.out.println("Emprestimo realizado com sucesso");
             }else{
-                System.out.println("Livro não encontrado");
+
+                System.out.println("Emprestimo não realizado");
+
+                //Preciso de uma função do catalogo pra saber o pq não houve emprestimo
             }
         }
+
+        public void novaReserva(String titulo){
+            ReservaRecibo volta = GerenciamentoReserva.AdicionarReservaLivro(Catalogo.exibirLivroTitulo(titulo), this);
+            reservas.add(volta);
+            System.out.println("Reserva realizada com sucesso");
+        }
+
+
 
         public void devolverLivro(String titulo){
             for(int i = 0; i < emprestimos.size(); i++){
