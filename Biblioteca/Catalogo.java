@@ -2,7 +2,7 @@ package Biblioteca;
 import java.util.ArrayList; 
 
 public class Catalogo {
-	protected ArrayList<No> catalogo;
+	protected ArrayList<Titulo> catalogo;
 	
 	public void inserirLivros(String titulo, String autor, String isbn){
 		for(int i=0; i<catalogo.size(); i++){
@@ -19,7 +19,7 @@ public class Catalogo {
 		Livro livro = new Livro(titulo, autor, isbn, 0);
 		int dispo=1;
 		int emprestimo=0;
-		No novoNo= new No(livro, dispo, emprestimo);
+		Titulo novoNo= new Titulo(livro, dispo, emprestimo);
 		catalogo.add(novoNo);
 		return;
 	}
@@ -27,7 +27,11 @@ public class Catalogo {
 	public boolean excluirLivro(String isbn){
 		for(int i=0; i<catalogo.size();i++){
 			if(catalogo.get(i).getLivros().get(0).getIsbn().equals(isbn)){
-				catalogo.remove(i);
+				int copias=catalogo.get(i).getLivros().size();
+				if(copias==1){
+					catalogo.remove(i);
+				}
+				catalogo.get(i).getLivros().remove(copias-1);
 				return true;
 			}
 		}
@@ -57,7 +61,7 @@ public class Catalogo {
 	}
 	public EnumDisponibilidade getLivro(String isbn){
 		for(int i=0; i<catalogo.size();i++){
-			if(isbn==catalogo.get(i).getLivros().get(0).getIsbn()){
+			if(catalogo.get(i).getLivros().get(0).getIsbn().equals(isbn)){
 				if(catalogo.get(i).getDisponivel()>0){
 					return EnumDisponibilidade.DISPONIVEL;
 				}
@@ -67,4 +71,33 @@ public class Catalogo {
 		return null;
 
 	}
+
+	public void exibirLivrosIsbn(String isbn){
+		for(int i=0; i<catalogo.size();i++){
+			if(isbn==catalogo.get(i).getLivros().get(0).getIsbn()){
+				catalogo.get(i);	
+			}
+		}
+	}
+
+	public void exibirLivrosNome(String nome){
+		for(int i=0; i<catalogo.size();i++){
+			if(catalogo.get(i).getLivros().get(0).getTitulo().equals(nome)){
+				catalogo.get(i);
+			}
+		}
+	}
+	public void exibirLivrosAutor(String autor){
+		for(int i=0; i<catalogo.size();i++){
+			if(catalogo.get(i).getLivros().get(0).getAutor().equals(autor)){
+				catalogo.get(i);
+			}
+		}
+	}
+
+	public static ReservaRecibo reservarLivro(Livro livro, UsuarioBiblioteca usuario)
+    {
+        return GerenciamentoReserva.AdicionarReservaLivro(livro,usuario);
+    }
+
 }

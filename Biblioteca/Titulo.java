@@ -2,12 +2,12 @@ package Biblioteca;
 
 import java.util.ArrayList;
 
-public class No {
+public class Titulo {
 	protected ArrayList<Livro> livros;
 	protected int disponivel;
 	protected int emprestimo;
 
-	No(ArrayList<Livro> livros, int disponivel, int emprestimo){
+	Titulo(ArrayList<Livro> livros, int disponivel, int emprestimo){
 		this.livros=livros;
 		this.disponivel=disponivel;
 		this.emprestimo=emprestimo;
