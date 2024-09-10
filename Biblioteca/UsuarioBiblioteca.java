@@ -34,7 +34,7 @@ public class UsuarioBiblioteca extends Usuario {
         return this.emprestimos; //Retorna o array por completo
     }
 
-    public ArrayList<ReservaRecibo> getReservas(int i){
+    public ArrayList<ReservaRecibo> getReservas(){
         return this.reservas; //Mesma coisa de cima
     }
 
