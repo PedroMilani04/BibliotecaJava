@@ -3,9 +3,15 @@ package Biblioteca;
 import java.util.ArrayList;
 
 public class No {
-	protected ArrayList<Livro> livros = new ArrayList<Livro>();
+	protected ArrayList<Livro> livros;
 	protected int disponivel;
 	protected int emprestimo;
+
+	No(ArrayList<Livro> livros, int disponivel, int emprestimo){
+		this.livros=livros;
+		this.disponivel=disponivel;
+		this.emprestimo=emprestimo;
+	}
 	public ArrayList<Livro> getLivros() {
 		return livros;
 	}
