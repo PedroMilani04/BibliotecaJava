@@ -56,7 +56,7 @@ public class UsuarioBiblioteca extends Usuario {
                 EmprestimoLivro emprestimo = (EmprestimoLivro) volta; //Casting de volta para EmprestimoLivro, ou seja, afirmando que volta é um emprestimo
                 emprestimos.add(emprestimo); //Adiciona no array
             }if(volta instanceof Reserva){
-                Reserva reserva = (Reserva) volta; //Mesma coisa de cima, mas com reserva
+                ReservaRecibo reserva = (ReservaRecibo) volta; //Mesma coisa de cima, mas com reserva
                 reservas.add(reserva); // adiciona no array
             }else{
                 System.out.println("Livro não encontrado");

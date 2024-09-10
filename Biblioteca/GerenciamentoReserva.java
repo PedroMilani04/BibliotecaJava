@@ -53,6 +53,7 @@ public class GerenciamentoReserva {
         }
         Reserva livroAReservar = new Reserva(livro, usuario);
         gerenciadorReserva.add(livroAReservar);
+        livro.setDisponibilidade(EnumDisponibilidade.RESERVADO);
         return recibo;
         // livro não reservado, logo o usuario é o primeiro
     }
@@ -76,6 +77,10 @@ public class GerenciamentoReserva {
                 gerenciadorReserva.get(contador).checarSeUsuario(recibo.getUsuario()) )
             { // esse if checa se o recibo bate com o livro e se o livro tem reserva no nome do usuario
                 gerenciadorReserva.get(contador).retirarEspecificoUsuario(recibo.getUsuario());
+                if(gerenciadorReserva.get(contador).isVazio()){
+                    recibo.setDisponibilidade(EnumDisponibilidade.DISPONIVEL);
+                }
+                
                 return true;
                 // permitido com sucesso
             }

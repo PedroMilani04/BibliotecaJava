@@ -46,4 +46,8 @@ public class ReservaRecibo {
         return usuario;
     }
     
+    
+    public void setDisponibilidade( EnumDisponibilidade disponibilidade){
+        livro.setDisponibilidade(disponibilidade);
+    }
 }

@@ -13,14 +13,24 @@ public class Bibliotecario extends UsuarioBiblioteca{
         super(nome, email, CPF);
     }
 
-    public Reserva getReserva(int idUsuario, String nomeLivroBuscado)
+    public ReservaRecibo getReserva(int idUsuario, String nomeLivroBuscado)
     {
         return BancoUsuarios.getReserva(idUsuario,nomeLivroBuscado);
     }
 
+    public ArrayList<ReservaRecibo> getReservas(int idUsuario)
+    {
+        return BancoUsuarios.getReservas(idUsuario);
+    }
+
     public EmprestimoLivro getEmprestimo(int idUsuario, String nomeLivroBuscado)
     {
-        return BancoUsuarios.getEmprestimo(idUsuario,nomeLivroBuscado);
+        return BancoUsuarios.getEmprestimo(idUsuario, nomeLivroBuscado);
+    }
+
+    public ArrayList<EmprestimoLivro> getEmprestimos(int idUsuario)
+    {
+        return BancoUsuarios.getEmprestimos(idUsuario);
     }
     
     public ArrayList<Multa> getMultas(int idUsuario)
@@ -28,13 +38,13 @@ public class Bibliotecario extends UsuarioBiblioteca{
         return BancoUsuarios.getMultas(idUsuario);
     }
 
-    public boolean cancelarMulta(String codMulta, int idUsuario)
+    public boolean quitarMulta(String codMulta, int idUsuario)
     {
         for(Multa multaElemento : getMultas(idUsuario))
         {
             if(multaElemento.getCodMulta().equals(codMulta))
             {
-                multaElemento.setPaga(true);
+                multaElemento.quitarMulta();
                 return true;
             }
         }
