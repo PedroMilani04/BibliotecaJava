@@ -17,7 +17,9 @@ public class GerenciarEmprestimo {
 
     public EmprestimoLivro realizarEmprestimo(USUARIO user, LIVRO livro) {
         if (user.possuiMulta) {
+                  System.out.println("NULL: Possui Multa.");
             return null;
+
         } else {
             if (Catalogo.disponivel(livro)) {
                 LocalDate dataComeco = LocalDate.now();
@@ -25,7 +27,9 @@ public class GerenciarEmprestimo {
                 return new EmprestimoLivro(livro, user, dataComeco, dataFim);
             }
         }
+              System.out.println("NULL: Livro Indisponível.");
         return null;
+        
     }
 }
 
