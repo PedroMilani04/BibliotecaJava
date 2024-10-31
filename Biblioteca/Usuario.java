@@ -39,6 +39,8 @@ public class Usuario {
         return ID;
     }
 
+    //Somente para arrumar dados errados
+
     public void setCpf(String CPF){
         if(CPF.length() != 11){
             throw new IllegalArgumentException("CPF inválido"); //Bloqueia a modificação, caso seja necessario, por invalidez de CPF

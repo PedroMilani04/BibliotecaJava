@@ -7,6 +7,7 @@ public class Cadastro {
     protected String email;
     protected String senha;
     protected String confirmacao;
+    protected int lvl; //lvl do usuario, 1  = usuario biblioteca, 2 = usuario bibliotecario
     protected Hashtable<Cadastro, Usuario> ht_cad_for_usu = new Hashtable<Cadastro, Usuario>(); //Criando uma hashtable para armazenar os cadastros e os usuarios (acha o usu usando o cadas)
     protected Hashtable<String, Cadastro> ht_email_for_cad = new Hashtable<String, Cadastro>(); //Criando uma hashtable para armazenar os emails e os cadastros (acha o cadas usando o email)
     protected Hashtable<String, Cadastro> ht_nickname_for_cad = new Hashtable<String, Cadastro>(); //Criando uma hashtable para armazenar os nicknames e os cadastros (acha o cadas usando o nickname)
@@ -24,6 +25,7 @@ public class Cadastro {
 
     public Cadastro(String email, String senha, String confirmacao){
         this.email = email;
+        this.lvl = 1;
         if(senha.length() >= 8 && senha.equals(confirmacao)){ //Verifica se a senha tem 8 ou mais caracteres e se a senha e a confirmação são iguais
             this.senha = senha;
         }else{
@@ -39,6 +41,7 @@ public class Cadastro {
         String nome;
         String CPF;
         String nickname;
+        String endereco;
 
         Scanner input = new Scanner(System.in);
         System.out.println("Digite seu email: ");
@@ -48,6 +51,20 @@ public class Cadastro {
             System.out.println("Email já cadastrado. Por favor, escolha outro.");
             email = input.nextLine();
         }
+
+        System.out.println("Digite seu nome: ");
+        nome = input.nextLine();
+
+        System.out.println("Digite seu CPF: ");
+        CPF = input.nextLine();
+
+        while(CPF.length() != 11){
+            System.out.println("CPF inválido, tente novamente");
+            CPF = input.nextLine();
+        }
+
+        System.out.println("Digite seu endereço: ");
+        endereco = input.nextLine();
 
         System.out.println("Digite sua senha: ");
         senha = input.nextLine();
@@ -68,17 +85,7 @@ public class Cadastro {
             confirmacao = input.nextLine();
         }
 
-        System.out.println("Digite seu nome: ");
-        nome = input.nextLine();
-        System.out.println("Digite seu CPF: ");
-        CPF = input.nextLine();
-
-        while(CPF.length() != 11){
-            System.out.println("CPF inválido, tente novamente");
-            CPF = input.nextLine();
-        }
-
-        System.out.println("Digite um nickname: "); //procurar no banco de dados se já existe criar dps[...]
+        System.out.println("Digite um nickname: "); //procurar no banco de dados se já existe criar dps[...] (FEITO)
         nickname = input.nextLine();
 
         while(ht_nickname_for_cad.containsKey(nickname)) {
@@ -87,12 +94,26 @@ public class Cadastro {
         }
 
         Cadastro cadastro = new Cadastro(email, senha, confirmacao);
-        Usuario usuario = new Usuario(nome, email, CPF, nickname);
 
+        System.out.println("Usuário biblioteca ou bibliotecário? (1 para usuário biblioteca, 2 para bibliotecário)");
+        int escolha = input.nextInt();
+
+        if(escolha == 2){
+            
+            System.out.println("Insira a senha de administrador: ");
+            String senhaAdmin = input.nextLine();
+
+            if(senhaAdmin.equals("admin")){
+                Bibliotecario bibliotecario = new Bibliotecario(nome, email, CPF, endereco, nickname); //Ver com o arthur pra arrumar
+                ht_cad_for_usu.put(cadastro, bibliotecario);
+            }
+        }else{
+            UsuarioBiblioteca usuarioBi = new UsuarioBiblioteca(nome, email, CPF, endereco, nickname);
+            ht_cad_for_usu.put(cadastro, usuarioBi);
+        }
         //tecnicamente... é pra funcionar, vamos ver.
 
         //Se isso funcionar eu sou um gênio
-        ht_cad_for_usu.put(cadastro, usuario);
         ht_email_for_cad.put(email, cadastro);
         ht_nickname_for_cad.put(nickname, cadastro);
 
