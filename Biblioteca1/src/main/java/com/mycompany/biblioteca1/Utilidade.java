@@ -11,6 +11,9 @@ public class Utilidade {
     
     private static final String caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvxyz0123456789";
     
+    /*
+    *  Arredonda um valor do tipo double para o valor int mais próximo, caso for um valor X.5 será arredondado para cima.
+    */
     public static int arredondarDoubleInt(double valor)
     {
         int valorInteiro = (int)valor;
@@ -22,6 +25,10 @@ public class Utilidade {
         return valorInteiro;
     }
     
+    /*
+    *  Gera uma string de caracteres do alfabeto(maiscula e minuscula) e de algarismos,
+    *  O tamanho da string é definida pelo parametro
+    */
     public static String gerarStringAleatoria(int tamanho)
     {
          StringBuilder stringNova = new StringBuilder(tamanho);
@@ -37,7 +44,13 @@ public class Utilidade {
          return stringNova.toString();
     }
     
-        private static char calcularDigitoCPF(String CPF, int inicio)
+    /*
+    *  Calcula um dos digitos ultimos digitos do CPF
+    *  o digito calculado depende do parametro, 
+    *  caso o valor do parametro for 0, irá ser calculado o penúltimo digito do CPF,
+    *  caso o valor do parametro for 1, irá ser calculado o últiomo digo do CPF.
+    */
+    private static char calcularDigitoCPF(String CPF, int inicio)
     {
         int total = 0;
         int multiplicador = 10;
@@ -56,6 +69,11 @@ public class Utilidade {
         return Character.forDigit((11 - total), 10);
     }
     
+    /*
+    *  Verifica se o CPF recebbido pelo parametro é valido ou não.
+    *  retorna true ou false
+    *  O formato do CPF é abcdefghij e não abc.def.fgh-ij
+    */
     public static boolean verificarCPF(String CPF)
     {
         //supondo que o CPF nao tenha . ou -
