@@ -11,7 +11,7 @@ public class Cadastro {
     protected Hashtable<Cadastro, Usuario> ht_cad_for_usu = new Hashtable<Cadastro, Usuario>(); //Criando uma hashtable para armazenar os cadastros e os usuarios (acha o usu usando o cadas)
     protected Hashtable<String, Cadastro> ht_email_for_cad = new Hashtable<String, Cadastro>(); //Criando uma hashtable para armazenar os emails e os cadastros (acha o cadas usando o email)
     protected Hashtable<String, Cadastro> ht_nickname_for_cad = new Hashtable<String, Cadastro>(); //Criando uma hashtable para armazenar os nicknames e os cadastros (acha o cadas usando o nickname)
-
+    protected Bibliotecario adm = new Bibliotecario("admin", "admin@admin.com", 1111111111, "admin");
     //Procurar como fazer uma hashtable pra por nicknames dos emails (maior nota de criatividade, ou entra com o email ou entra com o nickname //////////FEITO!!!!
 
     //criptografar talvez? (não é necessário, mas é uma boa prática)
@@ -31,6 +31,14 @@ public class Cadastro {
         }else{
             throw new IllegalArgumentException("Senhas não conferem"); //Bloqueia a criação do objeto por senha e confirmação diferentes
         }
+    }
+
+    public Cadastro(){
+        //Construtor vazio 
+    }
+
+    public String getSenha(){
+        return senha;
     }
 
     public String getEmail(){
@@ -103,7 +111,7 @@ public class Cadastro {
             System.out.println("Insira a senha de administrador: ");
             String senhaAdmin = input.nextLine();
 
-            if(senhaAdmin.equals("admin")){
+            if(senhaAdmin.equals(bibliotecario.getSenhaAdmin())){
                 Bibliotecario bibliotecario = new Bibliotecario(nome, email, CPF, endereco, nickname); //Ver com o arthur pra arrumar
                 ht_cad_for_usu.put(cadastro, bibliotecario);
             }
