@@ -21,8 +21,8 @@ public class UsuarioBiblioteca extends Usuario {
     protected ArrayList<Multa> multas;
     
 
-    public UsuarioBiblioteca(String nome, String email, String CPF){
-        super(nome, email, CPF);
+    public UsuarioBiblioteca(String nome, String email, String CPF, String endereco, String nickname){
+        super(nome, email, CPF, nickname);
         this.endereco = endereco;
         this.possuiMulta = false;
         this.emprestimos = new ArrayList<EmprestimoLivro>();
