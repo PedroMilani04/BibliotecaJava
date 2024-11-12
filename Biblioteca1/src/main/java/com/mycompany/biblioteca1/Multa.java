@@ -1,16 +1,16 @@
-package Biblioteca;
+package com.mycompany.biblioteca1;
 import java.time.LocalDate;
-import Biblioteca.Emprestimolivro;
-import Biblioteca.Usuario;
+import java.util.ArrayList;
 
-public class Multa{
+public class Multa implements Subject{
     //atributos da multa
     protected String codMulta;
     protected String idUsuario;
     protected LocalDate dataExpedicao;
     protected double valor;
     protected boolean isPaga;
-    
+    private ArrayList<Observer> observers = new ArrayList<>();
+
 
     //construtor
     public Multa(String codMulta, String idUsuario, double valor, boolean isPaga) {
@@ -59,13 +59,35 @@ public class Multa{
         return true;
     }
     
+    // Métodos de Subject
+    @Override
+    public void adicionarObserver(Observer observer) {
+        observers.add(observer);
+    }
+
+    @Override
+    public void removerObserver(Observer observer) {
+        observers.remove(observer);
+    }
+
+    @Override
+    public void notificarObservers(Multa multa) {
+        for (Observer observer : observers) {
+            observer.notificarMulta(multa);
+        }
+    }
+    
     //método para gerar uma multa
     public  Multa gerarMulta(EmprestimoLivro emprestimoLivro) {
         if (emprestimoLivro.isEmprestimoAtrasado()) {
             LocalDate dataExpedicao = LocalDate.now();
-            valorMulta = 3,5;
+            valorMulta = 3.5;
             codMulta = "M-" + emprestimoLivro.getUsuario() + "-" + dataAtual.toString();
-            return new Multa(codMulta, emprestimoLivro.getIdUsuario(), valorMulta, false);
+            Multa multa = new Multa(codMulta, emprestimoLivro.getIdUsuario(), valorMulta, false);
+
+            notificarObservers(multa);
+
+            return multa;
         }
         return null;
     }

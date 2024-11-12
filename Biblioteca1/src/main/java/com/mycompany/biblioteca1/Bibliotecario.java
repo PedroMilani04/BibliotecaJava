@@ -1,4 +1,4 @@
-package Biblioteca;
+package com.mycompany.biblioteca1;
 
 /**
  *
@@ -8,11 +8,39 @@ package Biblioteca;
 import java.util.ArrayList;
 
 public class Bibliotecario extends UsuarioBiblioteca{
-    Bibliotecario(String nome, String email, String CPF)
+   private Catalogo catalogo = Catalogo.getInstancia();
+   private int nivel;
+    Bibliotecario(String nome, String email, String CPF, String endereco, String nickname, int nivel)
     {
-        super(nome, email, CPF);
+        super(nome, email, CPF, endereco, nickname);
+        this.nivel = nivel;
     }
-
+    
+    Bibliotecario(String nome, String email, String CPF, String endereco, String nickname)
+    {
+        super(nome, email, CPF, endereco, nickname);
+        this.nivel = 0;
+    }
+    
+    public int getNivel()
+    {
+        return this.nivel;
+    }
+    
+    private void setNivelProprio(int nivel)
+    {
+        this.nivel = nivel;
+    }
+    
+    public boolean setNivel(Bibliotecario alvo, int nivel)
+    {
+        if(this.getNivel() > 0 && nivel < this.getNivel())
+        {
+            alvo.setNivelProprio(nivel);
+        }
+        return false;
+    }
+    
     //retorna uma reserva especifica de um usuario
     public ReservaRecibo getReserva(int idUsuario, String nomeLivroBuscado)
     {
@@ -59,14 +87,12 @@ public class Bibliotecario extends UsuarioBiblioteca{
     //metodo utilizado para adicionar um livro
     public void adicionarLivro(String titulo, String autor, String isbn)
     {
-        Catalogo.inserirLivros(titulo, autor, isbn);
+        catalogo.inserirLivros(titulo, autor, isbn);
     }
     
     //metodo utilizado para remover um livro
     public void removerLivro(String isbn, int tombo)
     {
-        Catalogo.excluirLivro(isbn, tombo);
+        catalogo.excluirLivro(isbn, tombo);
     }
-    
-    
 }

@@ -1,8 +1,22 @@
-package Biblioteca;
+package com.mycompany.biblioteca1;
 import java.util.ArrayList; 
 
 public class Catalogo {
 	protected ArrayList<Titulo> catalogo;
+        
+        private static Catalogo instancia;
+
+    // Construtor privado para evitar instância externa
+    private Catalogo() {
+    }
+
+    // Método para obter a instância única
+    public static synchronized Catalogo getInstancia() {
+        if (instancia == null) {
+            instancia = new Catalogo();
+        }
+        return instancia;
+    }
 	
 	public void inserirLivros(String titulo, String autor, String isbn){
 		for(int i=0; i<catalogo.size(); i++){
@@ -19,19 +33,19 @@ public class Catalogo {
 		Livro livro = new Livro(titulo, autor, isbn, 0);
 		int dispo=1;
 		int emprestimo=0;
-		Titulo novoNo= new Titulo(livro, dispo, emprestimo);
+		Titulo novoNo= new Titulo(livro, dispo, emprestimo); // Titulo está recebendo arrayList Livro
 		catalogo.add(novoNo);
 		return;
 	}
 	
-	public boolean excluirLivro(String isbn){
+	public boolean excluirLivro(String isbn, int tombo){
 		for(int i=0; i<catalogo.size();i++){
 			if(catalogo.get(i).getLivros().get(0).getIsbn().equals(isbn)){
 				int copias=catalogo.get(i).getLivros().size();
 				if(copias==1){
 					catalogo.remove(i);
 				}
-				catalogo.get(i).getLivros().remove(copias-1);
+				catalogo.get(i).getLivros().remove(tombo-1);
 				return true;
 			}
 		}

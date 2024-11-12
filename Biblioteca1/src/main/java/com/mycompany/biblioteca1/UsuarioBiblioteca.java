@@ -1,35 +1,29 @@
-package Biblioteca;
+package com.mycompany.biblioteca1;
 
-import Biblioteca.Livro;
-import Biblioteca.EmprestimoLivro;
-import Biblioteca.Reserva;
-import Biblioteca.ReservaRecibo;
-import Biblioteca.BancoUsuarios;
-import Biblioteca.Catalogo; // Proximo a ser adc
-import Biblioteca.Multa;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.time.LocalDate;
 
 
-public class UsuarioBiblioteca extends Usuario {
+public class UsuarioBiblioteca extends Usuario implements Observer {
     protected String endereco;
     protected boolean possuiMulta;
     //Arrays de emprestimos, reservas e multas. Ou seja, uma lista para cada um desses atributos
     protected ArrayList<EmprestimoLivro> emprestimos;
     protected ArrayList<ReservaRecibo> reservas;
     protected ArrayList<Multa> multas;
-    
+    private Catalogo catalogo = Catalogo.getInstancia();
 
-    public UsuarioBiblioteca(String nome, String email, String CPF){
-        super(nome, email, CPF);
+
+    public UsuarioBiblioteca(String nome, String email, String CPF, String endereco, String nickname){
+        super(nome, email, CPF, nickname);
         this.endereco = endereco;
         this.possuiMulta = false;
         this.emprestimos = new ArrayList<EmprestimoLivro>();
         this.reservas = new ArrayList<ReservaRecibo>();
         this.multas = new ArrayList<Multa>();
         BancoUsuarios.adicionarUsuario(this);
-    }
+    }   
 
     public int getID(){
         return ID;
@@ -55,8 +49,8 @@ public class UsuarioBiblioteca extends Usuario {
         return endereco;
     }
 
-        public void novoEmprestimo(String titulo){
-            EmprestimoLivro volta = GerenciarEmprestimo.realizarEmprestimo(this, Catalogo.exibirLivroTitulo(titulo));//a função já diz por só propria o que faz
+        public void novoEmprestimo(String titulo){ // instanciar catalogo... retornarLivroNome(string titulo) que retorna o primeiro disponível no array de livros
+            EmprestimoLivro volta = GerenciarEmprestimo.realizarEmprestimo(this, catalogo.exibirLivrosNome(titulo));//a função já diz por só propria o que faz
             if(volta != null){
                 emprestimos.add(volta);
                 System.out.println("Emprestimo realizado com sucesso");
@@ -69,7 +63,7 @@ public class UsuarioBiblioteca extends Usuario {
         }
 
         public void novaReserva(String titulo){
-            ReservaRecibo volta = GerenciamentoReserva.AdicionarReservaLivro(Catalogo.exibirLivroTitulo(titulo), this);
+            ReservaRecibo volta = GerenciamentoReserva.AdicionarReservaLivro(Catalogo.exibirLivrosNome(titulo), this);
             reservas.add(volta);
             System.out.println("Reserva realizada com sucesso");
         }
@@ -79,7 +73,8 @@ public class UsuarioBiblioteca extends Usuario {
         public void devolverLivro(String titulo){
             for(int i = 0; i < emprestimos.size(); i++){
                 if(emprestimos.get(i).getLivro().getTitulo().equals(titulo)){ //Se o livro for igual ao titulo passado 
-                    Catalogo.devolverLivro(emprestimos.get(i).getLivro()); //Deve remover do array lá no catalogo
+                    //Catalogo.devolverLivro(emprestimos.get(i).getLivro()); //Deve remover do array lá no catalogo
+                    // DESCOMENTAR DEPOIS DE INSTANCIAR O CATALOGO
                     emprestimos.remove(i); //remove do array
                     System.out.println("Livro devolvido com sucesso");
                     return;
@@ -88,4 +83,9 @@ public class UsuarioBiblioteca extends Usuario {
             System.out.println("Livro não encontrado");
         }
 
+           @Override
+    public void notificarMulta(Multa multa) {
+        System.out.println("Você tem uma nova multa: " + multa.getCodMulta() + ", valor: " + multa.getValor());
+    }
+        
 }

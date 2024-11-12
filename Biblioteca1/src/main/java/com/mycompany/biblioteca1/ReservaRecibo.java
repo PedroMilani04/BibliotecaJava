@@ -1,4 +1,4 @@
-package Biblioteca;
+package com.mycompany.biblioteca1;
 
 // Gerencimaneto Reserva: possui metodos statics para que o usuario utilize
 // sendo possivel as seguintes funcionalidades
