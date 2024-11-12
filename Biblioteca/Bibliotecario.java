@@ -65,7 +65,7 @@ public class Bibliotecario extends UsuarioBiblioteca{
     //metodo utilizado para remover um livro
     public void removerLivro(String isbn, int tombo)
     {
-        Catalogo.excluirLivro(isbn, tombo);
+        Catalogo.excluirLivro(isbn);
     }
     
     

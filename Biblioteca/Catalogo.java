@@ -1,17 +1,47 @@
-package Biblioteca;
+package com.mycompany.biblioteca1;
 import java.util.ArrayList; 
 
 public class Catalogo {
 	protected ArrayList<Titulo> catalogo;
+        
+        private static Catalogo instancia;
+
+    // Construtor privado para evitar instância externa
+    private Catalogo() {
+    }
+
+    // Método para obter a instância única
+    public static synchronized Catalogo getInstancia() {
+        if (instancia == null) {
+            instancia = new Catalogo();
+        }
+        return instancia;
+    }
+
+	private Titulo busca(int posicao){
+		return catalogo.get(posicao);
+	}
+
+	private int tamanhoCatalogo(){
+		return catalogo.size();
+	}
+
+	private void deletarLivroCatalogo(int posicao){
+		catalogo.remove(posicao);
+	}
+
+	private void adicionarNo(Titulo no){
+		catalogo.add(no);
+	}
 	
 	public void inserirLivros(String titulo, String autor, String isbn){
-		for(int i=0; i<catalogo.size(); i++){
-			if(catalogo.get(i).getLivros().get(0).getIsbn().equals(isbn)){
-				int tombo=catalogo.size()-1;
+		for(int i=0; i<tamanhoCatalogo(); i++){
+			if(busca(i).compararIsbn(isbn)){
+				int tombo=busca(i).criarTombo();
 				Livro livro = new Livro(titulo, autor, isbn, tombo);
-				int dispo=catalogo.get(i).getDisponivel()+1;
-				catalogo.get(i).getLivros().add(livro);
-				catalogo.get(i).setDisponivel(dispo);	
+				int dispo=busca(i).getDisponivel()+1;
+				busca(i).adicionarLivros(livro);
+				busca(i).setDisponivel(dispo);	
 				return;			
 			}
 
@@ -19,19 +49,19 @@ public class Catalogo {
 		Livro livro = new Livro(titulo, autor, isbn, 0);
 		int dispo=1;
 		int emprestimo=0;
-		Titulo novoNo= new Titulo(livro, dispo, emprestimo);
-		catalogo.add(novoNo);
+		Titulo novoNo= new Titulo(livro, dispo, emprestimo); // Titulo está recebendo arrayList Livro
+		adicionarNo(novoNo);
 		return;
 	}
 	
-	public boolean excluirLivro(String isbn){
-		for(int i=0; i<catalogo.size();i++){
-			if(catalogo.get(i).getLivros().get(0).getIsbn().equals(isbn)){
-				int copias=catalogo.get(i).getLivros().size();
+	public boolean excluirLivro(String isbn, int tombo){
+		for(int i=0; i<tamanhoCatalogo();i++){
+			if(busca(i).compararIsbn(isbn)){
+				int copias=busca(i).tamanhoLivros();
 				if(copias==1){
-					catalogo.remove(i);
+					deletarLivroCatalogo(i);
 				}
-				catalogo.get(i).getLivros().remove(copias-1);
+				busca(i).deletarLivro(tombo);
 				return true;
 			}
 		}
@@ -39,19 +69,17 @@ public class Catalogo {
 	}
 
 	public boolean devolverLivro(String isbn, int tombo){
-		for(int i=0; i<catalogo.size();i++){
-			if(catalogo.get(i).getLivros().get(0).getIsbn().equals(isbn)){
-				for(int j=0; j<catalogo.get(i).getLivros().size(); j++){
-					if(tombo==catalogo.get(i).getLivros().get(j).getTombo()){
-						catalogo.get(i).getLivros().get(j).setDisponibilidade(EnumDisponibilidade.DISPONIVEL);
-						if(catalogo.get(i).getEmprestimo()>=0){
-							int emprestimo=catalogo.get(i).getEmprestimo()-1;
-							catalogo.get(i).setEmprestimo(emprestimo);	
+		for(int i=0; i<tamanhoCatalogo();i++){ //percorre o catálogo comparando o isbn (rg) do livro
+			if(busca(i).compararIsbn(isbn)){
+				for(int j=0; j<busca(i).tamanhoLivros(); j++){ // caso tenha achado, busca o tompo dele pra mudar a disponibilidade
+					if(tombo==busca(i).buscarTombo(j)){
+						busca(i).mudarDisponibilidade(j, EnumDisponibilidade.DISPONIVEL); //muda disponibilidade
+						if(busca(i).getEmprestimo()>=0){  //caso tenha mais um de um livro emprestado, temos que aumentar em um a quantidade de livos disponivel e diminuir a de livros emprestados
+							int emprestimo=busca(i).getEmprestimo()-1;
+							busca(i).setEmprestimo(emprestimo);	
 						}
-						if(catalogo.get(i).getDisponivel()<catalogo.get(i).getLivros().size()){
-						int disponivel = catalogo.get(i).getDisponivel()+1;
-						catalogo.get(i).setDisponivel(disponivel);
-						}
+						int disponivel = busca(i).getDisponivel()+1; //aumenta em um a disponibilidade
+						busca(i).setDisponivel(disponivel);
 						return true;
 					}
 				}
@@ -60,9 +88,9 @@ public class Catalogo {
 		return false;
 	}
 	public EnumDisponibilidade getLivro(String isbn){
-		for(int i=0; i<catalogo.size();i++){
-			if(catalogo.get(i).getLivros().get(0).getIsbn().equals(isbn)){
-				if(catalogo.get(i).getDisponivel()>0){
+		for(int i=0; i<tamanhoCatalogo();i++){
+			if(busca(i).compararIsbn(isbn)){
+				if(busca(i).getDisponivel()>0){
 					return EnumDisponibilidade.DISPONIVEL;
 				}
 				return EnumDisponibilidade.RESERVADO;
@@ -73,24 +101,24 @@ public class Catalogo {
 	}
 
 	public void exibirLivrosIsbn(String isbn){
-		for(int i=0; i<catalogo.size();i++){
-			if(isbn==catalogo.get(i).getLivros().get(0).getIsbn()){
-				catalogo.get(i);	
+		for(int i=0; i<tamanhoCatalogo();i++){
+			if(busca(i).compararIsbn(isbn)){
+				busca(i);	
 			}
 		}
 	}
 
 	public void exibirLivrosNome(String nome){
-		for(int i=0; i<catalogo.size();i++){
-			if(catalogo.get(i).getLivros().get(0).getTitulo().equals(nome)){
-				catalogo.get(i);
+		for(int i=0; i<tamanhoCatalogo();i++){
+			if(busca(i).compararNome(nome)){
+				busca(i);
 			}
 		}
 	}
 	public void exibirLivrosAutor(String autor){
-		for(int i=0; i<catalogo.size();i++){
-			if(catalogo.get(i).getLivros().get(0).getAutor().equals(autor)){
-				catalogo.get(i);
+		for(int i=0; i<tamanhoCatalogo();i++){
+			if(busca(i).compararAutor(autor)){
+				busca(i);
 			}
 		}
 	}
