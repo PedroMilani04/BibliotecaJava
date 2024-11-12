@@ -34,7 +34,7 @@ public class Cadastro {
     }
 
     Cadastro adminMaster = new Cadastro("adm@adm.com", "adminbiblioteca", "adminbiblioteca");
-    Bibliotecario dono = new Bibliotecario("ADM", "adm@adm.com", "1", "...", "ADM");
+    Bibliotecario dono = new Bibliotecario("ADM", "adm@adm.com", "1", "...", "ADM", Interger.MAX_VALUE);
     ht_cad_for_usu.put(adminMaster, dono);
     ht_email_for_cad.put("adm@adm.com", adminMaster);
     ht_nickname_for_cad.put("ADMIN", adminMaster);
