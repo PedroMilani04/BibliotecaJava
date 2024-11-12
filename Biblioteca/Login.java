@@ -7,11 +7,16 @@ public class Login {
         //Construtor vazio
     }
 
-    public Login loginEmail(String email, String senha){
+    public Usuario loginEmail(String email, String senha){
         Usuario usu = proxy.verificacaoEmail(email, senha);
         if(usu != null){
             System.out.println("Login efetuado com sucesso");
-            return this;
+            if(usu instanceof UsuarioBiblioteca){
+                return (UsuarioBiblioteca)usu;
+            }
+            else{
+                return (Bibliotecario)usu;
+            }
         }
         else{
             System.out.println("Email ou senha incorretos");
