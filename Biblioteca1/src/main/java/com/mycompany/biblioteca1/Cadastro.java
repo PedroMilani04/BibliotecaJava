@@ -14,16 +14,18 @@ public class Cadastro {
     protected Hashtable<Cadastro, Usuario> ht_cad_for_usu = new Hashtable<Cadastro, Usuario>(); //Criando uma hashtable para armazenar os cadastros e os usuarios (acha o usu usando o cadas)
     protected Hashtable<String, Cadastro> ht_email_for_cad = new Hashtable<String, Cadastro>(); //Criando uma hashtable para armazenar os emails e os cadastros (acha o cadas usando o email)
     protected Hashtable<String, Cadastro> ht_nickname_for_cad = new Hashtable<String, Cadastro>(); //Criando uma hashtable para armazenar os nicknames e os cadastros (acha o cadas usando o nickname)
-    protected Bibliotecario adm = new Bibliotecario("admin", "admin@admin.com", "1111111111", "endereco", "admin");
+    protected Bibliotecario adm = new Bibliotecario("admin", "admin@admin.com", 1111111111, "admin");
     //Procurar como fazer uma hashtable pra por nicknames dos emails (maior nota de criatividade, ou entra com o email ou entra com o nickname //////////FEITO!!!!
 
     //criptografar talvez? (não é necessário, mas é uma boa prática)
+
     //Criar verificação de CPF tanto aqui como na classe usuario, talvez fazer com que n bata já na função a senha incompativel com a confirmação e menos de 8 (FEITO!!)
     //Adicionar isso dps (boa gpt lindo perfeito!!!!) 9FEITO !!
 
     //00:04 e ninguém imagina como tá a mente do palhaço
 
     //criar um método que iria mostrar o que no hashtable porém ele será privado, só pra uso interno
+
     public Cadastro(String email, String senha, String confirmacao){
         this.email = email;
         this.lvl = 1;
@@ -45,6 +47,7 @@ public class Cadastro {
     public String getEmail(){
         return email;
     }
+
     public void criarConta(){ //Criação de conta e verificação de dados para não bater em outro na hora de criar
         String nome;
         String CPF;
@@ -121,7 +124,7 @@ public class Cadastro {
         }
         //tecnicamente... é pra funcionar, vamos ver.
 
-       //Se isso funcionar eu sou um gênio
+        //Se isso funcionar eu sou um gênio
         ht_email_for_cad.put(email, cadastro);
         ht_nickname_for_cad.put(nickname, cadastro);
 
@@ -149,4 +152,6 @@ public class Cadastro {
         }
     }
 
+    
+    
 }

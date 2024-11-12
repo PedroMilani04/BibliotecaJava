@@ -5,7 +5,7 @@
 package com.mycompany.biblioteca1;
 
 public class Proxy {
-        protected Cadastro cad = new Cadastro();
+    protected Cadastro cad = new Cadastro();
 
     public Proxy(){
         //Construtor vazio
@@ -32,4 +32,6 @@ public class Proxy {
             System.out.println("Nickname ou senha incorretos"); //Não posso falar qual está incorreto para não dar brecha para hackers
             return null;
     }
+
+    
 }
