@@ -1,4 +1,4 @@
-package Biblioteca;
+package com.mycompany.biblioteca1;
 
 /**
  *
