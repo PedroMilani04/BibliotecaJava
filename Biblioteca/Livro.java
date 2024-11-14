@@ -4,10 +4,12 @@ public class Livro{
     private String isbn; 
     private int tombo;
     private EnumDisponibilidade disponibilidade;
+    private ArrayList<EnumGeneros> generos;
         
     
     public Livro(){
         this.disponibilidade = EnumDisponibilidade.DISPONIVEL;
+        this.generos = ArrayList<>();
     }
 
     public Livro(String titulo, String autor, String isbn, int tombo){
@@ -16,6 +18,16 @@ public class Livro{
         this.isbn = isbn;
         this.tombo = tombo;
         this.disponibilidade = EnumDisponibilidade.DISPONIVEL;
+        this.generos = ArrayList<>();
+    }
+
+    public Livro(String titulo, String autor, String isbn, int tombo, ArrayList<EnumGeneros> generos){
+        this.titulo = titulo;
+        this.autor = autor;
+        this.isbn = isbn;
+        this.tombo = tombo;
+        this.disponibilidade = EnumDisponibilidade.DISPONIVEL;
+        this.generos = generos;
     }
 
     public void setTitulo(String titulo){
@@ -38,6 +50,20 @@ public class Livro{
         this.disponibilidade = disponibilidade;
     }
 
+    public void addGenero(EnumGeneros genero){
+        generos.add(genero);
+    }
+
+    public boolean removeGenero(EnumGeneros genero){
+        for(int i=0; i<generos.size(); i++){
+            if(generos.get(i).equals(genero)){
+                generos.remove(genero);
+                return true;
+            }
+        }
+        return false;
+    }
+
     public String getTitulo(){
         return titulo;
     }
@@ -57,4 +83,9 @@ public class Livro{
     public EnumDisponibilidade getDisponibilidade(){
         return disponibilidade;
     }
+
+    public ArrayList<EnumGeneros> getGeneros(){
+        return generos;
+    }
+
 }
