@@ -85,6 +85,27 @@ public class Titulo {
 	public int tamanhoLivros(){
 		return getLivros().size();
 	}
-}
-    
+
+	public String procurarGeneros(ArrayList genero){
+		// for(int i=0; i<tamanhoLivros(); i++){
+		// 	for(int j=0; j<genero.size(); j++){
+		// 		if(=genero.get(j)){
+		// 			return true;
+		// 		}
+		// 	}
+		// }
+		return getLivros().getGenero();
+	}
+
+	public int procurarDisponivel(){
+		for(int j=0; j<tamanhoLivros(); j++){
+			if(busca(j).getDisponibilidade().equals(EnumDisponibilidade.DISPONIVEL)){
+				return busca(j).getTombo();
+			}
+		}
+		return -1;
+		
+	}
+
+}    
 

@@ -123,6 +123,16 @@ public class Catalogo {
 		}
 	}
 
+	public void exibirLivrosGenero(ArrayList genero){
+		for(int i=0; i<genero.size(); i++){
+			for(int j=0; j<tamanhoCatalogo();j++){
+				if(genero.get(i)==busca(j).procurarGeneros()){
+					imprimir(busca(j));
+				}
+			}
+		}
+	}
+
 	public static ReservaRecibo reservarLivro(Livro livro, UsuarioBiblioteca usuario)
     {
         return GerenciamentoReserva.AdicionarReservaLivro(livro,usuario);
