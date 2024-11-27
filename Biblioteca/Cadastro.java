@@ -7,9 +7,9 @@ public class Cadastro {
     protected String senha;
     protected String confirmacao;
     protected int lvl; //lvl do usuario, 1  = usuario biblioteca, 2 = usuario bibliotecario
-    protected Hashtable<Cadastro, Usuario> ht_cad_for_usu = new Hashtable<Cadastro, Usuario>(); //Criando uma hashtable para armazenar os cadastros e os usuarios (acha o usu usando o cadas)
-    protected Hashtable<String, Cadastro> ht_email_for_cad = new Hashtable<String, Cadastro>(); //Criando uma hashtable para armazenar os emails e os cadastros (acha o cadas usando o email)
-    protected Hashtable<String, Cadastro> ht_nickname_for_cad = new Hashtable<String, Cadastro>(); //Criando uma hashtable para armazenar os nicknames e os cadastros (acha o cadas usando o nickname)
+    private static Hashtable<Cadastro, Usuario> ht_cad_for_usu = new Hashtable<Cadastro, Usuario>(); //Criando uma hashtable para armazenar os cadastros e os usuarios (acha o usu usando o cadas)
+    private static Hashtable<String, Cadastro> ht_email_for_cad = new Hashtable<String, Cadastro>(); //Criando uma hashtable para armazenar os emails e os cadastros (acha o cadas usando o email)
+    private static Hashtable<String, Cadastro> ht_nickname_for_cad = new Hashtable<String, Cadastro>(); //Criando uma hashtable para armazenar os nicknames e os cadastros (acha o cadas usando o nickname)
     //Procurar como fazer uma hashtable pra por nicknames dos emails (maior nota de criatividade, ou entra com o email ou entra com o nickname //////////FEITO!!!!
 
     //criptografar talvez? (não é necessário, mas é uma boa prática)
@@ -22,7 +22,16 @@ public class Cadastro {
     //criar um método que iria mostrar o que no hashtable porém ele será privado, só pra uso interno
 
     //Criação do Dono para fazer outros bibliotecarios
-    
+
+
+    // Bloco de inicialização estático
+    static {
+        Cadastro adminMaster = new Cadastro("adm@adm.com", "adminbiblioteca", "adminbiblioteca");
+        Bibliotecario dono = new Bibliotecario("ADM", "adm@adm.com", "1111111111", "...", "ADM", Integer.MAX_VALUE);
+        ht_cad_for_usu.put(adminMaster, dono);
+        ht_email_for_cad.put("adm@adm.com", adminMaster);
+        ht_nickname_for_cad.put("ADMIN", adminMaster);
+    }
 
     public Cadastro(String email, String senha, String confirmacao){
         this.email = email;
@@ -32,13 +41,6 @@ public class Cadastro {
             throw new IllegalArgumentException("Senhas não conferem"); //Bloqueia a criação do objeto por senha e confirmação diferentes
         }
     }
-
-    Cadastro adminMaster = new Cadastro("adm@adm.com", "adminbiblioteca", "adminbiblioteca");
-    Bibliotecario dono = new Bibliotecario("ADM", "adm@adm.com", "1", "...", "ADM", Interger.MAX_VALUE);
-    ht_cad_for_usu.put(adminMaster, dono);
-    ht_email_for_cad.put("adm@adm.com", adminMaster);
-    ht_nickname_for_cad.put("ADMIN", adminMaster);
-
 
     public Cadastro(){
         //Construtor vazio 
@@ -210,7 +212,4 @@ public class Cadastro {
             return null;
         }
     }
-
-    
-    
 }
