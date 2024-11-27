@@ -123,7 +123,7 @@ public class Catalogo {
 		}
 	}
 
-	public void exibirLivrosNome(String nome){
+	public void exibirLivrosTitulo(String nome){
 		for(int i=0; i<tamanhoCatalogo();i++){
 			if(busca(i).compararNome(nome)){
 				exibicao.imprimir(busca(i));
