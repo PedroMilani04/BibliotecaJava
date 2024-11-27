@@ -3,14 +3,20 @@ package com.mycompany.bibliotecafinal;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import Hotel.Usuario;
+
 public class Bibliotecafinal {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         Catalogo catalogo = Catalogo.getInstancia();
         GerenciarEmprestimo gerenciarEmprestimo = GerenciarEmprestimo.getInstancia();
-        Bibliotecario dono = BibliotecarioFactory.criarDono("Dono", "Dono@email", "28001238938", "Endereco", "Dono");
         Livro livro;
+        Cadastro c;
+        Login l;
+        String email, senha;
+        Usuario usuario, dono; //Para logins
+
 
         System.out.println("============================================================");
         System.out.println(" ###   ###   ###   #     ###    ##   ###   ####   ##    ##  ");
@@ -43,21 +49,12 @@ public class Bibliotecafinal {
             switch (opcao) {
                 case 1:
                     System.out.println("===== Cadastrar Usuario =====");
-                    System.out.print("Nome: ");
-                    String nome = scanner.nextLine();
-                    System.out.print("Email: ");
-                    String email = scanner.nextLine();
-                    System.out.print("CPF: ");
-                    String cpf = scanner.nextLine();
-                    System.out.print("Endereco: ");
-                    String endereco = scanner.nextLine();
-                    System.out.print("Nickname: ");
-                    String nickname = scanner.nextLine();
-                    UsuarioBiblioteca usuario = new UsuarioBiblioteca(nome, email, cpf, endereco, nickname);
+                    c.criarConta();
                     System.out.println("Usuario cadastrado com sucesso!");
                     break;
                 case 2:
                     System.out.println("===== Adicionar Livro =====");
+                    dono = l.loginEmail("adm@adm.com", "adminbiblioteca"); // Login do administrador
                     System.out.print("Titulo: ");
                     String titulo = scanner.nextLine();
                     System.out.print("Autor: ");
@@ -151,9 +148,13 @@ public class Bibliotecafinal {
                     break;
                 case 3:
                     System.out.println("===== Realizar Emprestimo =====");
-                    System.out.print("ID do Usuario: ");
-                    int idUsuario = scanner.nextInt();
-                    scanner.nextLine();
+                    System.out.print("Faça seu login\n Email: ");
+                    email = scanner.nextLine();
+                    System.out.print("Senha: ");
+                    senha = scanner.nextLine();
+
+                    usuario = l.loginEmail(email, senha);
+
                     System.out.print("Titulo do Livro: ");
                     titulo = scanner.nextLine();
                     usuario = BancoUsuarios.getUsuarioBiblioteca(idUsuario);
@@ -166,9 +167,12 @@ public class Bibliotecafinal {
                     break;
                 case 4:
                     System.out.println("===== Reservar Livro =====");
-                    System.out.print("ID do Usuario: ");
-                    idUsuario = scanner.nextInt();
-                    scanner.nextLine();
+                    System.out.print("Faça seu login\n Email: ");
+                    email = scanner.nextLine();
+                    System.out.print("Senha: ");
+                    senha = scanner.nextLine();
+
+                     usuario = l.loginEmail(email, senha);
                     System.out.print("Titulo do Livro: ");
                     titulo = scanner.nextLine();
                     usuario = BancoUsuarios.getUsuarioBiblioteca(idUsuario);
@@ -181,9 +185,13 @@ public class Bibliotecafinal {
                     break;
                 case 5:
                     System.out.println("===== Devolver Livro =====");
-                    System.out.print("ID do Usuario: ");
-                    idUsuario = scanner.nextInt();
-                    scanner.nextLine();
+                    System.out.print("Faça seu login\n Email: ");
+                    email = scanner.nextLine();
+                    System.out.print("Senha: ");
+                    senha = scanner.nextLine();
+
+                    usuario = l.loginEmail(email, senha);
+
                     System.out.print("Titulo do Livro: ");
                     titulo = scanner.nextLine();
                     usuario = BancoUsuarios.getUsuarioBiblioteca(idUsuario);
@@ -199,9 +207,14 @@ public class Bibliotecafinal {
                     break;
                 case 7:
                     System.out.println("===== Multas do Usuario =====");
-                    System.out.print("ID do Usuario: ");
-                    idUsuario = scanner.nextInt();
-                    scanner.nextLine();
+
+                    System.out.print("Faça seu login\n Email: ");
+                    email = scanner.nextLine();
+                    System.out.print("Senha: ");
+                    senha = scanner.nextLine();
+
+                    usuario = l.loginEmail(email, senha);
+                    
                     usuario = BancoUsuarios.getUsuarioBiblioteca(idUsuario);
                     if (usuario != null) {
                         for (Multa multa : usuario.getMultas()) {
