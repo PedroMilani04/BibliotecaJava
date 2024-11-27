@@ -1,5 +1,4 @@
-package Biblioteca;
-
+package com.mycompany.bibliotecafinal;
 public class Logger {
     public void imprimir(Titulo titulo){
         System.out.println("Nome : " + titulo.getNome()+"\n");
