@@ -3,8 +3,6 @@ package com.mycompany.bibliotecafinal;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import Hotel.Usuario;
-
 public class Bibliotecafinal {
 
     public static void main(String[] args) {
@@ -12,8 +10,8 @@ public class Bibliotecafinal {
         Catalogo catalogo = Catalogo.getInstancia();
         GerenciarEmprestimo gerenciarEmprestimo = GerenciarEmprestimo.getInstancia();
         Livro livro;
-        Cadastro c;
-        Login l;
+        Cadastro c = new Cadastro();
+        Login l = new Login();
         String email, senha;
         Usuario usuario, dono; //Para logins
 
@@ -26,6 +24,12 @@ public class Bibliotecafinal {
         System.out.println(" #  #   #    #  #  #      #    #  #   #    #     #  #  #  # ");
         System.out.println(" ###   ###   ###   ####  ###    ##    #    ####   ##   #  # ");
         System.out.println("============================================================");
+        
+        System.out.print("Faça seu login\n Email: ");
+        email = scanner.nextLine();
+        System.out.print("Senha: ");
+        senha = scanner.nextLine();
+        usuario = l.loginEmail(email, senha);
         
         int opcao;
         do{
@@ -45,7 +49,7 @@ public class Bibliotecafinal {
             System.out.println("====================================");
             opcao = scanner.nextInt();
             scanner.nextLine();
-
+               
             switch (opcao) {
                 case 1:
                     System.out.println("===== Cadastrar Usuario =====");
@@ -143,60 +147,40 @@ public class Bibliotecafinal {
                         }
                     }
                     
-                    dono.adicionarLivro(titulo,autor,isbn);
+                    ((Bibliotecario)dono).adicionarLivro(titulo,autor,isbn);
                     System.out.println("Livro adicionado com sucesso!");
                     break;
                 case 3:
                     System.out.println("===== Realizar Emprestimo =====");
-                    System.out.print("Faça seu login\n Email: ");
-                    email = scanner.nextLine();
-                    System.out.print("Senha: ");
-                    senha = scanner.nextLine();
-
-                    usuario = l.loginEmail(email, senha);
-
+                    
                     System.out.print("Titulo do Livro: ");
                     titulo = scanner.nextLine();
-                    usuario = BancoUsuarios.getUsuarioBiblioteca(idUsuario);
                     livro = catalogo.getLivroDisponivel(titulo);
                     if (usuario != null && livro != null) {
-                        usuario.novoEmprestimo(livro);
+                        ((UsuarioBiblioteca)usuario).novoEmprestimo(livro);
                     } else {
                         System.out.println("Usuario ou livro nao encontrado.");
                     }
                     break;
                 case 4:
                     System.out.println("===== Reservar Livro =====");
-                    System.out.print("Faça seu login\n Email: ");
-                    email = scanner.nextLine();
-                    System.out.print("Senha: ");
-                    senha = scanner.nextLine();
 
-                     usuario = l.loginEmail(email, senha);
                     System.out.print("Titulo do Livro: ");
                     titulo = scanner.nextLine();
-                    usuario = BancoUsuarios.getUsuarioBiblioteca(idUsuario);
                     livro = catalogo.getLivroEmprestado(titulo);
                     if (usuario != null && livro != null) {
-                        usuario.novaReserva(livro);
+                        ((UsuarioBiblioteca)usuario).novaReserva(livro);
                     } else {
                         System.out.println("Usuario ou livro nao encontrado.");
                     }
                     break;
                 case 5:
                     System.out.println("===== Devolver Livro =====");
-                    System.out.print("Faça seu login\n Email: ");
-                    email = scanner.nextLine();
-                    System.out.print("Senha: ");
-                    senha = scanner.nextLine();
-
-                    usuario = l.loginEmail(email, senha);
 
                     System.out.print("Titulo do Livro: ");
                     titulo = scanner.nextLine();
-                    usuario = BancoUsuarios.getUsuarioBiblioteca(idUsuario);
                     if (usuario != null) {
-                        usuario.devolverLivro(titulo);
+                        ((UsuarioBiblioteca)usuario).devolverLivro(titulo);
                     } else {
                         System.out.println("Usuario nao encontrado.");
                     }
@@ -207,17 +191,9 @@ public class Bibliotecafinal {
                     break;
                 case 7:
                     System.out.println("===== Multas do Usuario =====");
-
-                    System.out.print("Faça seu login\n Email: ");
-                    email = scanner.nextLine();
-                    System.out.print("Senha: ");
-                    senha = scanner.nextLine();
-
-                    usuario = l.loginEmail(email, senha);
                     
-                    usuario = BancoUsuarios.getUsuarioBiblioteca(idUsuario);
                     if (usuario != null) {
-                        for (Multa multa : usuario.getMultas()) {
+                        for (Multa multa : ((UsuarioBiblioteca)usuario).getMultas()) {
                             System.out.println("- Multa " + multa.getCodMulta() + ": R$" + multa.getValor() + (multa.getisPaga() ? " (Paga)" : " (Não Paga)"));
                         }
                     } else {
@@ -227,11 +203,11 @@ public class Bibliotecafinal {
                 case 8:
                     System.out.println("===== Quitar Multa =====");
                     System.out.print("ID do Usuario: ");
-                    idUsuario = scanner.nextInt();
+                    int idUsuario = scanner.nextInt();
                     scanner.nextLine();
                     System.out.print("Codigo da Multa: ");
                     String codMulta = scanner.nextLine();
-                    dono.quitarMulta(codMulta, idUsuario);
+                    ((Bibliotecario)usuario).quitarMulta(codMulta, idUsuario);
                     break;
                 case 9:
                     System.out.println("========================================================");
