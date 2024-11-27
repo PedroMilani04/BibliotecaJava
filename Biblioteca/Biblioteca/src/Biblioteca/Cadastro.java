@@ -28,7 +28,7 @@ public class Cadastro {
     // Bloco de inicialização estático
     static {
         Cadastro adminMaster = new Cadastro("adm@adm.com", "adminbiblioteca", "adminbiblioteca");
-        Bibliotecario dono = new Bibliotecario("ADM", "adm@adm.com", "1111111111", "...", "ADM", Integer.MAX_VALUE);
+        Bibliotecario dono = BibliotecarioFactory.criarDono("ADM", "adm@adm.com", "1111111111", "...", "ADM");
         ht_cad_for_usu.put(adminMaster, dono);
         ht_email_for_cad.put("adm@adm.com", adminMaster);
         ht_nickname_for_cad.put("ADMIN", adminMaster);
@@ -184,7 +184,7 @@ public class Cadastro {
 
         Cadastro cadastro = new Cadastro(email, senha, confirmacao);
 
-        Bibliotecario bibliotecario = new Bibliotecario(nome, email, CPF, endereco, nickname);
+        Bibliotecario bibliotecario = BibliotecarioFactory.criarBibliotecario(nome, email, CPF, endereco, nickname);
         ht_cad_for_usu.put(cadastro, bibliotecario);
         
         //tecnicamente... é pra funcionar, vamos ver.

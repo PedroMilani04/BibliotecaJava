@@ -62,8 +62,8 @@ public class UsuarioBiblioteca extends Usuario {
         return endereco;
     }
 
-        public void novoEmprestimo(String titulo){
-            EmprestimoLivro volta = gerenciarEmprestimo.realizarEmprestimo(this, catalogo.exibirLivroTitulo(titulo));//a função já diz por só propria o que faz
+        public void novoEmprestimo(Livro livro){
+            EmprestimoLivro volta = gerenciarEmprestimo.realizarEmprestimo(this, livro);//a função já diz por só propria o que faz
             if(volta != null){
                 emprestimos.add(volta);
                 System.out.println("Emprestimo realizado com sucesso");
@@ -75,8 +75,8 @@ public class UsuarioBiblioteca extends Usuario {
             }
         }
 
-        public void novaReserva(String titulo){
-            ReservaRecibo volta = GerenciamentoReserva.AdicionarReservaLivro(catalogo.exibirLivroTitulo(titulo), this);
+        public void novaReserva(Livro livro){
+            ReservaRecibo volta = GerenciamentoReserva.AdicionarReservaLivro(livro, this);
             reservas.add(volta);
             System.out.println("Reserva realizada com sucesso");
         }
@@ -86,8 +86,7 @@ public class UsuarioBiblioteca extends Usuario {
         public void devolverLivro(String titulo){
             for(int i = 0; i < emprestimos.size(); i++){
                 if(emprestimos.get(i).getLivro().getTitulo().equals(titulo)){ //Se o livro for igual ao titulo passado 
-                    Livro aux = emprestimos.get(i).getLivro();
-                    catalogo.devolverLivro(aux.getIsbn(),aux.getTombo()); //Deve remover do array lá no catalogo
+                    catalogo.devolverLivro(emprestimos.get(i).getLivro()); //Deve remover do array lá no catalogo
                     emprestimos.remove(i); //remove do array
                     System.out.println("Livro devolvido com sucesso");
                     return;
