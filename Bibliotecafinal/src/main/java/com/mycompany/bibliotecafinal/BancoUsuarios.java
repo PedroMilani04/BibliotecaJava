@@ -17,6 +17,18 @@ public class BancoUsuarios {
         usuarios.add(novoUsuario);
     }
     
+    public static UsuarioBiblioteca getUsuarioBiblioteca(int Id)
+    {
+        for(UsuarioBiblioteca usuario : usuarios)
+        {
+            if(usuario.getID() == Id)
+            {
+                return usuario;
+            }
+        }
+        return null;
+    }
+    
     //retorna um emprestimo especifico de um usuario
     public static EmprestimoLivro getEmprestimo(int idUsuario, String nomeLivroBuscado)
     {

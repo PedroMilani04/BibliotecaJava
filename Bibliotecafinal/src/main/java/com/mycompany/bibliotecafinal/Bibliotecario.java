@@ -89,6 +89,11 @@ public class Bibliotecario extends UsuarioBiblioteca{
         catalogo.inserirLivros(titulo, autor, isbn);
     }
     
+    public void adicionarLivro(String titulo, String autor, String isbn, ArrayList<EnumGeneros> generos)
+    {
+        catalogo.inserirLivros(titulo, autor, isbn, generos);
+    }
+    
     //metodo utilizado para remover um livro
     public void removerLivro(String isbn, int tombo)
     {

@@ -7,9 +7,10 @@ public class Bibliotecafinal {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        ArrayList<EnumGeneros> generos = new ArrayList();
         Catalogo catalogo = Catalogo.getInstancia();
         GerenciarEmprestimo gerenciarEmprestimo = GerenciarEmprestimo.getInstancia();
+        Bibliotecario dono = BibliotecarioFactory.criarDono("Dono", "Dono@email", "28001238938", "Endereco", "Dono");
+        Livro livro;
 
         System.out.println("============================================================");
         System.out.println(" ###   ###   ###   #     ###    ##   ###   ####   ##    ##  ");
@@ -65,11 +66,87 @@ public class Bibliotecafinal {
                     String isbn = scanner.nextLine();
                     System.out.print("Tombo: ");
                     int tombo = scanner.nextInt();
-                    System.out.println("Genero (1-TECNOLOGIA, 2-FICCAO): ");
-                    int generoOpcao = scanner.nextInt();
-                    EnumGeneros genero = (generoOpcao == 1) ? EnumGeneros.COMEDIA : EnumGeneros.FANTASIA;
-                    Livro livro = new Livro(titulo, autor, isbn, tombo, generos);
-                    catalogo.inserirLivros(titulo, autor, isbn);
+                    System.out.println("Generos:");
+                    System.out.println("1  Comedia");
+                    System.out.println("2  Drama");
+                    System.out.println("3  Fantasia");
+                    System.out.println("4  Triller");
+                    System.out.println("5  Terror");
+                    System.out.println("6  Romance");
+                    System.out.println("7  Policial");
+                    System.out.println("8  Distopia");
+                    System.out.println("9  Acao");
+                    System.out.println("10 Aventura");
+                    System.out.println("11 Bibliografia");
+                    System.out.println("12 Autoajuda");
+                    System.out.println("13 True crime");
+                    System.out.println("14 Didatico");
+                    System.out.println("15 Sair da adicao de generos");
+                    
+                    int generoOpcao = -1;
+                    ArrayList<EnumGeneros> generos = new ArrayList<EnumGeneros>();
+                    while(generoOpcao != 15)
+                    {
+                        generoOpcao = scanner.nextInt();
+                        if(generoOpcao == 1)
+                        {
+                            generos.add(EnumGeneros.COMEDIA);
+                        }
+                        else if(generoOpcao == 2)
+                        {
+                            generos.add(EnumGeneros.DRAMA);
+                        }
+                        else if(generoOpcao == 3)
+                        {
+                            generos.add(EnumGeneros.FANTASIA);
+                        }
+                        else if(generoOpcao == 4)
+                        {
+                            generos.add(EnumGeneros.THRILLER);
+                        }
+                        else if(generoOpcao == 5)
+                        {
+                            generos.add(EnumGeneros.TERROR);
+                        }
+                        else if(generoOpcao == 6)
+                        {
+                            generos.add(EnumGeneros.ROMANCE);
+                        }
+                        else if(generoOpcao == 7)
+                        {
+                            generos.add(EnumGeneros.POLICIAL);
+                        }
+                        else if(generoOpcao == 8)
+                        {
+                            generos.add(EnumGeneros.DISTOPIA);
+                        }
+                        else if(generoOpcao == 9)
+                        {
+                            generos.add(EnumGeneros.ACAO);
+                        }
+                        else if(generoOpcao == 10)
+                        {
+                            generos.add(EnumGeneros.AVENTURA);
+                        }
+                        else if(generoOpcao == 11)
+                        {
+                            generos.add(EnumGeneros.BIBLIOGRAFIA);
+                        }
+                        else if(generoOpcao == 12)
+                        {
+                            generos.add(EnumGeneros.AUTOAJUDA);
+                        }
+                        else if(generoOpcao == 13)
+                        {
+                            generos.add(EnumGeneros.TRUECRIME);
+                        }
+                        else if(generoOpcao == 14)
+                        {
+                            generos.add(EnumGeneros.DIDATICO);
+                        }
+                    }
+                    
+                    dono.adicionarLivro(titulo,autor,isbn);
                     System.out.println("Livro adicionado com sucesso!");
                     break;
                 case 3:
@@ -79,8 +156,8 @@ public class Bibliotecafinal {
                     scanner.nextLine();
                     System.out.print("Titulo do Livro: ");
                     titulo = scanner.nextLine();
-                    usuario = BancoUsuarios.buscarUsuarioPorID(idUsuario);
-                    livro = livro.getTitulo(titulo);
+                    usuario = BancoUsuarios.getUsuarioBiblioteca(idUsuario);
+                    livro = catalogo.getLivroDisponivel(titulo);
                     if (usuario != null && livro != null) {
                         usuario.novoEmprestimo(livro);
                     } else {
@@ -94,8 +171,8 @@ public class Bibliotecafinal {
                     scanner.nextLine();
                     System.out.print("Titulo do Livro: ");
                     titulo = scanner.nextLine();
-                    usuario = BancoUsuarios.buscarUsuarioPorID(idUsuario);
-                    livro = livro;
+                    usuario = BancoUsuarios.getUsuarioBiblioteca(idUsuario);
+                    livro = catalogo.getLivroEmprestado(titulo);
                     if (usuario != null && livro != null) {
                         usuario.novaReserva(livro);
                     } else {
@@ -109,7 +186,7 @@ public class Bibliotecafinal {
                     scanner.nextLine();
                     System.out.print("Titulo do Livro: ");
                     titulo = scanner.nextLine();
-                    usuario = BancoUsuarios.buscarUsuarioPorID(idUsuario);
+                    usuario = BancoUsuarios.getUsuarioBiblioteca(idUsuario);
                     if (usuario != null) {
                         usuario.devolverLivro(titulo);
                     } else {
@@ -118,16 +195,14 @@ public class Bibliotecafinal {
                     break;
                 case 6:
                     System.out.println("===== Livros no Catalogo =====");
-                    for (Livro livro : catalogo.getLivros()) {
-                        System.out.println("- " + livro.getTitulo() + " (" + livro.getDisponibilidade() + ")");
-                    }
+                    catalogo.exibirLivros();
                     break;
                 case 7:
                     System.out.println("===== Multas do Usuario =====");
                     System.out.print("ID do Usuario: ");
                     idUsuario = scanner.nextInt();
                     scanner.nextLine();
-                    usuario = BancoUsuarios.buscarUsuarioPorID(idUsuario);
+                    usuario = BancoUsuarios.getUsuarioBiblioteca(idUsuario);
                     if (usuario != null) {
                         for (Multa multa : usuario.getMultas()) {
                             System.out.println("- Multa " + multa.getCodMulta() + ": R$" + multa.getValor() + (multa.getisPaga() ? " (Paga)" : " (Não Paga)"));
@@ -143,17 +218,7 @@ public class Bibliotecafinal {
                     scanner.nextLine();
                     System.out.print("Codigo da Multa: ");
                     String codMulta = scanner.nextLine();
-                    usuario = BancoUsuarios.buscarUsuarioPorID(idUsuario);
-                    if (usuario != null) {
-                        for (Multa multa : usuario.getMultas()) {
-                            if (multa.getCodMulta().equals(codMulta)) {
-                                multa.quitarMulta();
-                                break;
-                            }
-                        }
-                    } else {
-                        System.out.println("Usuario ou multa nao encontrado.");
-                    }
+                    dono.quitarMulta(codMulta, idUsuario);
                     break;
                 case 9:
                     System.out.println("========================================================");
@@ -161,7 +226,7 @@ public class Bibliotecafinal {
                     System.out.println("#              Prof. Dr. Danillo Roberto               #");
                     System.out.println("#                                                      #");
                     System.out.println("#                 MEMBROS DO PROJETO:                  #");
-                    System.out.println("#  -Arthur Koichi                                      #");
+                    System.out.println("#  -Arthur Koichi Nakao                                #");
                     System.out.println("#  -Cristian Eidi                                      #");
                     System.out.println("#  -Gustavo Ribeiro                                    #");
                     System.out.println("#  -Henrique Finco                                     #");

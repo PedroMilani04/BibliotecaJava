@@ -14,6 +14,31 @@ public class Titulo {
 		this.disponivel=disponivel;
 		this.emprestimo=emprestimo;
 	}
+        
+        public Livro getLivroDisponivel()
+        {
+            for(Livro livro : livros)
+            {
+                if(livro.getDisponibilidade() == EnumDisponibilidade.DISPONIVEL)
+                {
+                    return livro;
+                }
+            }
+            return null;
+        }
+        
+        public Livro getLivroEmprestado()
+        {
+            for(Livro livro : livros)
+            {
+                if(livro.getDisponibilidade() == EnumDisponibilidade.EMPRESTADO)
+                {
+                    return livro;//Nao ficou bom, pq so devolve o primeiro livro emprestado que ele achar
+                }
+            }
+            return null;
+        }
+        
 	public ArrayList<Livro> getLivros() {
 		return livros;
 	}

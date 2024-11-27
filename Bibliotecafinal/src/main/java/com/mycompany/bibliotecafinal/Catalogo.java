@@ -65,7 +65,51 @@ public class Catalogo {
 		adicionarNo(novoNo);
 		return;
 	}
+        
+        public void inserirLivros(String titulo, String autor, String isbn, ArrayList<EnumGeneros> generos){
+		for(int i=0; i<tamanhoCatalogo(); i++){
+			if(busca(i).compararIsbn(isbn)){
+				int tombo=busca(i).criarTombo();
+				Livro livro = new Livro(titulo, autor, isbn, tombo, generos);
+				int dispo=busca(i).getDisponivel()+1;
+				busca(i).adicionarLivros(livro);
+				busca(i).setDisponivel(dispo);	
+				return;			
+			}
+
+		}
+		Livro livro = new Livro(titulo, autor, isbn, 0, generos);
+		int dispo=1;
+		int emprestimo=0;
+		Titulo novoNo= new Titulo(livro, dispo, emprestimo); // Titulo está recebendo arrayList Livro
+		adicionarNo(novoNo);
+		return;
+	}
 	
+        public Livro getLivroDisponivel(String titulo)
+        {
+            for(Titulo aux : catalogo)
+            {
+                if(aux.getNome().equals(titulo))
+                {
+                    return aux.getLivroDisponivel();
+                }
+            }
+            return null;
+        }
+        
+        public Livro getLivroEmprestado(String titulo)
+        {
+            for(Titulo aux : catalogo)
+            {
+                if(aux.getNome().equals(titulo))
+                {
+                    return aux.getLivroEmprestado();
+                }
+            }
+            return null;
+        }
+        
 	public boolean excluirLivro(String isbn, int tombo){
 		for(int i=0; i<tamanhoCatalogo();i++){
 			if(busca(i).compararIsbn(isbn)){
@@ -112,6 +156,12 @@ public class Catalogo {
 		}
 		return null;
 
+	}
+        
+        public void exibirLivros(){
+		for(int i=0; i<tamanhoCatalogo();i++){
+                    exibicao.imprimir(busca(i));
+		}
 	}
 
 	public void exibirLivrosIsbn(String isbn){
