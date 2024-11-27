@@ -1,5 +1,4 @@
-package Biblioteca;
-
+package com.mycompany.bibliotecafinal;
 public class Usuario {
     protected static int nextID = 1;
     protected String nome;

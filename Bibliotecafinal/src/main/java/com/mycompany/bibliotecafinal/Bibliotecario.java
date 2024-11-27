@@ -1,5 +1,4 @@
-package Biblioteca;
-
+package com.mycompany.bibliotecafinal;
 /**
  *
  * @author arthu
@@ -88,6 +87,11 @@ public class Bibliotecario extends UsuarioBiblioteca{
     public void adicionarLivro(String titulo, String autor, String isbn)
     {
         catalogo.inserirLivros(titulo, autor, isbn);
+    }
+    
+    public void adicionarLivro(String titulo, String autor, String isbn, ArrayList<EnumGeneros> generos)
+    {
+        catalogo.inserirLivros(titulo, autor, isbn, generos);
     }
     
     //metodo utilizado para remover um livro

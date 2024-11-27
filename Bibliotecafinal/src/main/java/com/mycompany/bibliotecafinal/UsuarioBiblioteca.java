@@ -1,12 +1,4 @@
-package Biblioteca;
-
-import Biblioteca.Livro;
-import Biblioteca.EmprestimoLivro;
-import Biblioteca.Reserva;
-import Biblioteca.ReservaRecibo;
-import Biblioteca.BancoUsuarios;
-import Biblioteca.Catalogo; // Proximo a ser adc
-import Biblioteca.Multa;
+package com.mycompany.bibliotecafinal;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.time.LocalDate;

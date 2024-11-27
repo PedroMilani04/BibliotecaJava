@@ -1,20 +1,16 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-package Biblioteca;
-
+package com.mycompany.bibliotecafinal;
 /**
  *
  * @author arthu
  */
 public class BibliotecarioFactory {
-    private static boolean flagDono = true;
+    private static int flagDono = 0;
     
     public static Bibliotecario criarDono(String nome, String email, String CPF, String endereco, String nickname)
     {
-        if(flagDono)
+        if(flagDono < 2)
         {
+            flagDono++;
             return new Bibliotecario(nome,email,CPF,endereco,nickname,Integer.MAX_VALUE);
         }
         return null;

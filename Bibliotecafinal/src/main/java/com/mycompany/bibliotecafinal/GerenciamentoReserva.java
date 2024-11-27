@@ -1,5 +1,4 @@
-package Biblioteca;
-
+package com.mycompany.bibliotecafinal;
 import java.util.ArrayList;
 
 // Gerencimaneto Reserva: possui metodos statics para que o usuario utilize

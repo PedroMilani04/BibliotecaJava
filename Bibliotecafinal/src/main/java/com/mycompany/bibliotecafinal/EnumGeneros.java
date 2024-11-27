@@ -1,5 +1,4 @@
-package Biblioteca;
-
+package com.mycompany.bibliotecafinal;
 public enum EnumGeneros{
     COMEDIA, DRAMA, FANTASIA, THRILLER, TERROR, ROMANCE, POLICIAL, DISTOPIA, ACAO, AVENTURA, BIBLIOGRAFIA, AUTOAJUDA, TRUECRIME, DIDATICO; 
 }

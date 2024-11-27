@@ -1,4 +1,4 @@
-package Biblioteca;
+package com.mycompany.bibliotecafinal;
 
 /**
  *
@@ -15,6 +15,18 @@ public class BancoUsuarios {
     public static void adicionarUsuario(UsuarioBiblioteca novoUsuario)
     {
         usuarios.add(novoUsuario);
+    }
+    
+    public static UsuarioBiblioteca getUsuarioBiblioteca(int Id)
+    {
+        for(UsuarioBiblioteca usuario : usuarios)
+        {
+            if(usuario.getID() == Id)
+            {
+                return usuario;
+            }
+        }
+        return null;
     }
     
     //retorna um emprestimo especifico de um usuario

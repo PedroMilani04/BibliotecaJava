@@ -1,5 +1,4 @@
-package Biblioteca;
-
+package com.mycompany.bibliotecafinal;
 public class Proxy {
     protected Cadastro cad = new Cadastro();
 
