@@ -1,4 +1,8 @@
 package Biblioteca;
+
+import java.time.LocalDate;
+import java.time.Period;
+
 public class GerenciarEmprestimo {
 
     private static GerenciarEmprestimo instancia;
@@ -15,8 +19,8 @@ public class GerenciarEmprestimo {
         return instancia;
     }
 
-    public EmprestimoLivro realizarEmprestimo(USUARIO user, LIVRO livro) {
-        if (user.possuiMulta) {
+    public EmprestimoLivro realizarEmprestimo(UsuarioBiblioteca user, Livro livro) {
+        if (user.getPossuiMulta()) {
                   System.out.println("NULL: Possui Multa.");
             return null;
 

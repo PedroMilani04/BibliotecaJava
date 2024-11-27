@@ -1,3 +1,7 @@
+package Biblioteca;
+
+import java.util.ArrayList;
+
 public class Livro{
     private String titulo;
     private String autor;
@@ -9,7 +13,7 @@ public class Livro{
     
     public Livro(){
         this.disponibilidade = EnumDisponibilidade.DISPONIVEL;
-        this.generos = ArrayList<>();
+        this.generos = new ArrayList<EnumGeneros>();
     }
 
     public Livro(String titulo, String autor, String isbn, int tombo){
@@ -18,7 +22,7 @@ public class Livro{
         this.isbn = isbn;
         this.tombo = tombo;
         this.disponibilidade = EnumDisponibilidade.DISPONIVEL;
-        this.generos = ArrayList<>();
+        this.generos = new ArrayList<EnumGeneros>();
     }
 
     public Livro(String titulo, String autor, String isbn, int tombo, ArrayList<EnumGeneros> generos){

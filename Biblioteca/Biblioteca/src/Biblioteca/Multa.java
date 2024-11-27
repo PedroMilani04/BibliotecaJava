@@ -1,19 +1,17 @@
 package Biblioteca;
 import java.time.LocalDate;
-import Biblioteca.Emprestimolivro;
-import Biblioteca.Usuario;
 
 public class Multa{
     //atributos da multa
     protected String codMulta;
-    protected String idUsuario;
+    protected int idUsuario;
     protected LocalDate dataExpedicao;
     protected double valor;
     protected boolean isPaga;
     
 
     //construtor
-    public Multa(String codMulta, String idUsuario, double valor, boolean isPaga) {
+    public Multa(String codMulta, int idUsuario, double valor, boolean isPaga) {
         this.codMulta = codMulta;
         this.idUsuario = idUsuario;
         this.dataExpedicao = LocalDate.now();
@@ -30,10 +28,10 @@ public class Multa{
         this.codMulta = codMulta;
     }
     //idUsuario
-    public String getIdUsuario(){
+    public int getIdUsuario(){
         return idUsuario;
     }
-    public void setIdUsuario(String idUsuario){
+    public void setIdUsuario(int idUsuario){
         this.idUsuario = idUsuario;
     }
     //dataExpedicao
@@ -63,7 +61,7 @@ public class Multa{
     public  Multa gerarMulta(EmprestimoLivro emprestimoLivro) {
         if (emprestimoLivro.isEmprestimoAtrasado()) {
             LocalDate dataExpedicao = LocalDate.now();
-            valorMulta = 3,5;
+            double valorMulta = 3.5;
             codMulta = "M-" + emprestimoLivro.getUsuario() + "-" + dataAtual.toString();
             return new Multa(codMulta, emprestimoLivro.getIdUsuario(), valorMulta, false);
         }

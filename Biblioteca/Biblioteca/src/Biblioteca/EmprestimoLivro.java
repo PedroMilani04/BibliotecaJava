@@ -3,31 +3,36 @@ package Biblioteca;
 import java.time.LocalDate;
 
 public class EmprestimoLivro {
-    private String livro;
-    private String usuario;
+    private Livro livro;
+    private UsuarioBiblioteca usuario;
     private LocalDate dataEmprestimo;
     private LocalDate dataDevolucao;
 
-    public EmprestimoLivro(String livro, String usuario, LocalDate dataEmprestimo, LocalDate dataDevolucao) {
+    public EmprestimoLivro(Livro livro, UsuarioBiblioteca usuario, LocalDate dataEmprestimo, LocalDate dataDevolucao) {
         this.livro = livro;
         this.usuario = usuario;
         this.dataEmprestimo = dataEmprestimo;
         this.dataDevolucao = dataDevolucao;
     }
 
-    public String getLivro() {
+    public Livro getLivro() {
         return livro;
     }
 
-    public void setLivro(String livro) {
+    public void setLivro(Livro livro) {
         this.livro = livro;
     }
-
-    public String getUsuario() {
+    
+    public int getIdUsuario()
+    {
+        return usuario.getID();
+    }
+    
+    public UsuarioBiblioteca getUsuario() {
         return usuario;
     }
 
-    public void setUsuario(String usuario) {
+    public void setUsuario(UsuarioBiblioteca usuario) {
         this.usuario = usuario;
     }
 

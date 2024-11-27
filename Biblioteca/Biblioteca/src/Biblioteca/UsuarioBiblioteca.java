@@ -34,7 +34,12 @@ public class UsuarioBiblioteca extends Usuario {
     public int getID(){
         return ID;
     }
-
+    
+    public boolean getPossuiMulta()
+    {
+        return this.possuiMulta;
+    }
+    
     public ArrayList<EmprestimoLivro> getEmprestimos(){
         return this.emprestimos; //Retorna o array por completo
     }
