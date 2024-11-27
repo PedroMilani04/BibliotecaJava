@@ -193,23 +193,30 @@ public class Cadastro {
         ht_nickname_for_cad.put(nickname, cadastro);
     }
     
-    public Usuario returnUsuarioEmail(String email){
-        if(ht_email_for_cad.containsKey(email)){
-            Usuario retorna = ht_cad_for_usu.get(ht_email_for_cad.get(email));
-            return retorna;
-        }else{
-            System.out.println("Usuário não encontrado");
-            return null; //configurar para dar erro ao retornar null
+
+    public static boolean verificarEmailESenha(String email, String senha) {
+        if (ht_email_for_cad.containsKey(email)) {
+            Cadastro cadastro = ht_email_for_cad.get(email);
+            return cadastro.getSenha().equals(senha);
         }
+        return false;
     }
 
-    public Usuario returnUsuarioNickname(String nickname){
-        if(ht_nickname_for_cad.containsKey(nickname)){
-            Usuario retorna = ht_cad_for_usu.get(ht_nickname_for_cad.get(nickname));
-            return retorna;
-        }else{
-            System.out.println("Usuário não encontrado");
-            return null;
+    public static Usuario returnUsuarioEmail(String email) {
+        Cadastro cad = ht_email_for_cad.get(email);
+        return ht_cad_for_usu.get(cad);
+    }
+
+    public static boolean verificarNicknameESenha(String nickname, String senha) {
+        if (ht_nickname_for_cad.containsKey(nickname)) {
+            Cadastro cadastro = ht_nickname_for_cad.get(nickname);
+            return cadastro.getSenha().equals(senha);
         }
+        return false;
+    }
+
+    public static Usuario returnUsuarioNickname(String nickname) {
+        Cadastro cad = ht_nickname_for_cad.get(nickname);
+        return ht_cad_for_usu.get(cad);
     }
 }

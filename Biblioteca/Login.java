@@ -1,13 +1,13 @@
 package Biblioteca;
 
-public class Login<T> {
+public class Login {
     protected Proxy proxy = new Proxy();
 
     public Login(){
         //Construtor vazio
     }
 
-    public T loginEmail(String email, String senha){
+    public Usuario loginEmail(String email, String senha){
         Usuario usu = proxy.verificacaoEmail(email, senha);
         if(usu != null){
             System.out.println("Login efetuado com sucesso");
