@@ -43,7 +43,8 @@ public class Bibliotecafinal {
             System.out.println("# [6] CONSULTAR LIVROS NO CATALOGO #");
             System.out.println("# [7] CONSULTAR MULTAS DO USUARIO  #");
             System.out.println("# [8] QUITAR MULTA                 #");
-            System.out.println("# [9] SOBRE O PROJETO              #");
+            System.out.println("# [9] LOGAR EM OUTRA CONTA         #");
+            System.out.println("# [10] SOBRE O PROJETO             #");
             System.out.println("# [0] SAIR                         #");
             System.out.print("# ESCOLHA UMA OPCAO PARA PROSSEGUIR: #");
             System.out.println("====================================");
@@ -210,6 +211,13 @@ public class Bibliotecafinal {
                     ((Bibliotecario)usuario).quitarMulta(codMulta, idUsuario);
                     break;
                 case 9:
+                    System.out.print("Faça seu login\n Email: ");
+                    email = scanner.nextLine();
+                    System.out.print("Senha: ");
+                    senha = scanner.nextLine();
+                    usuario = l.loginEmail(email, senha);
+                    break;
+                case 10:
                     System.out.println("========================================================");
                     System.out.println("#             PROJETO DA DISCIPLINA POOII              #");
                     System.out.println("#              Prof. Dr. Danillo Roberto               #");
