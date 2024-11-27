@@ -2,6 +2,7 @@ package Biblioteca;
 import java.util.Scanner;
 import java.util.Hashtable;
 
+
 public class Cadastro {
     protected String email;
     protected String senha;

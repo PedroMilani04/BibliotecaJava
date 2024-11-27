@@ -35,6 +35,18 @@ public class Catalogo {
 		catalogo.add(no);
 	}
 	
+        public int disponivel(Livro livro)
+        {
+            for(Titulo titulo : catalogo)
+            {
+                if(titulo.compararIsbn(livro.getIsbn()))
+                {
+                    return titulo.getDisponivel();
+                }
+            }
+            return 0;
+        }
+        
 	public void inserirLivros(String titulo, String autor, String isbn){
 		for(int i=0; i<tamanhoCatalogo(); i++){
 			if(busca(i).compararIsbn(isbn)){

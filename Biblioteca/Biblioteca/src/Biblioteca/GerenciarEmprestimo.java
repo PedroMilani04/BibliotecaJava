@@ -6,7 +6,8 @@ import java.time.Period;
 public class GerenciarEmprestimo {
 
     private static GerenciarEmprestimo instancia;
-
+    private static Catalogo catalogo = Catalogo.getInstancia();
+    
     // Construtor privado para evitar instância externa
     private GerenciarEmprestimo() {
     }
@@ -25,7 +26,7 @@ public class GerenciarEmprestimo {
             return null;
 
         } else {
-            if (Catalogo.disponivel(livro)) {
+            if (catalogo.disponivel(livro) > 0) {
                 LocalDate dataComeco = LocalDate.now();
                 LocalDate dataFim = dataComeco.plus(Period.ofDays(30));
                 return new EmprestimoLivro(livro, user, dataComeco, dataFim);

@@ -62,7 +62,7 @@ public class Multa{
         if (emprestimoLivro.isEmprestimoAtrasado()) {
             LocalDate dataExpedicao = LocalDate.now();
             double valorMulta = 3.5;
-            codMulta = "M-" + emprestimoLivro.getUsuario() + "-" + dataAtual.toString();
+            codMulta = "M-" + emprestimoLivro.getUsuario() + "-" + dataExpedicao.toString();
             return new Multa(codMulta, emprestimoLivro.getIdUsuario(), valorMulta, false);
         }
         return null;
