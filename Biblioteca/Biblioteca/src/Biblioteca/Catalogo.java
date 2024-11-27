@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Catalogo {
 	protected ArrayList<Titulo> catalogo;
-        
+	protected Logger exibicao;
         private static Catalogo instancia;
 
     // Construtor privado para evitar instância externa
@@ -81,7 +81,9 @@ public class Catalogo {
 		return false;
 	}
 
-	public boolean devolverLivro(String isbn, int tombo){
+	public boolean devolverLivro(Livro livro){
+		String isbn =livro.getIsbn();
+		int tombo= livro.getTombo();
 		for(int i=0; i<tamanhoCatalogo();i++){ //percorre o catálogo comparando o isbn (rg) do livro
 			if(busca(i).compararIsbn(isbn)){
 				for(int j=0; j<busca(i).tamanhoLivros(); j++){ // caso tenha achado, busca o tompo dele pra mudar a disponibilidade
@@ -116,7 +118,7 @@ public class Catalogo {
 	public void exibirLivrosIsbn(String isbn){
 		for(int i=0; i<tamanhoCatalogo();i++){
 			if(busca(i).compararIsbn(isbn)){
-				busca(i);	
+				exibicao.imprimir(busca(i));	
 			}
 		}
 	}
@@ -124,14 +126,14 @@ public class Catalogo {
 	public void exibirLivrosNome(String nome){
 		for(int i=0; i<tamanhoCatalogo();i++){
 			if(busca(i).compararNome(nome)){
-				busca(i);
+				exibicao.imprimir(busca(i));
 			}
 		}
 	}
 	public void exibirLivrosAutor(String autor){
 		for(int i=0; i<tamanhoCatalogo();i++){
 			if(busca(i).compararAutor(autor)){
-				busca(i);
+				exibicao.imprimir(busca(i));
 			}
 		}
 	}
@@ -139,8 +141,8 @@ public class Catalogo {
 	public void exibirLivrosGenero(ArrayList<EnumGeneros> genero){
 		for(int i=0; i<genero.size(); i++){
 			for(int j=0; j<tamanhoCatalogo();j++){
-				if(genero.get(i)==busca(j).procurarGeneros()){
-					imprimir(busca(j));
+				if(busca(j).procurarGeneros(genero)){
+					exibicao.imprimir(busca(j));
 				}
 			}
 		}

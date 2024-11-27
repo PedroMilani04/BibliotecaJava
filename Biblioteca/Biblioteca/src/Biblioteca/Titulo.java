@@ -41,26 +41,30 @@ public class Titulo {
 		return livros.get(posicao);
 	}
 
+	public String getNome(){
+		return getLivros().get(0).getTitulo();
+	}
+
 	public void mudarDisponibilidade(int posicao, EnumDisponibilidade disponibilidade){
 		busca(posicao).setDisponibilidade(disponibilidade);
 	}
 
 	public boolean compararIsbn(String isbn){
-		if(getLivros().get(0).getIsbn().equals(isbn)){
+		if(pegarISBN().equals(isbn)){
 			return true;
 		}
 		return false;
 	}
 
 	public boolean compararNome(String nome){
-		if(getLivros().get(0).getTitulo().equals(nome)){
+		if(getNome().equals(nome)){
 			return true;
 		}
 		return false;
 	}
 
 	public boolean compararAutor(String autor){
-		if(getLivros().get(0).getAutor().equals(autor)){
+		if(buscarAutor().equals(autor)){
 			return true;
 		}
 		return false;
@@ -86,15 +90,32 @@ public class Titulo {
 		return getLivros().size();
 	}
 
-	public String procurarGeneros(ArrayList genero){
-		// for(int i=0; i<tamanhoLivros(); i++){
-		// 	for(int j=0; j<genero.size(); j++){
-		// 		if(=genero.get(j)){
-		// 			return true;
-		// 		}
-		// 	}
-		// }
-		return getLivros().getGenero();
+	public int tamanhoGeneros(){
+		return getLivros().get(0).getGeneros().size();
+	}
+
+	public EnumGeneros pegarGenero(int posicao){
+		return getLivros().get(0).getGeneros().get(posicao);
+	}
+
+	public String pegarISBN(){
+		return getLivros().get(0).getIsbn();
+	}
+
+	public String buscarAutor(){
+		return getLivros().get(0).getAutor();
+	}
+
+	public boolean procurarGeneros(ArrayList<EnumGeneros> generos){
+		for(int i=0; i<generos.size(); i++){
+			for(int j=0; j<tamanhoGeneros(); j++){
+				if(generos.get(i)==pegarGenero(j)){
+					return true;
+				}
+			}
+		}
+		return false;
+		
 	}
 
 	public int procurarDisponivel(){
