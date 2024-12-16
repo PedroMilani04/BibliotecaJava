@@ -61,5 +61,15 @@ The **Library Management System** is a Java-based application designed to manage
 
 1. **Clone the Repository**
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/PedroMilani04/BibliotecaJava.git
    cd library-management-system
+
+2. **Compile the Code Use javac to compile all Java files**
+   ```bash
+   javac *.java
+
+
+1. **Run the Application Execute the Principal class**
+   ```bash
+   java Principal
+
