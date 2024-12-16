@@ -1,7 +1,17 @@
 # Library Management System
 
 ## Overview
+
 The **Library Management System** is a Java-based application designed to manage a library's core functionalities. It includes features for user and staff creation, book reservations, book management, fine management, and loan processing. The system allows searching books by their title or identification number and ensures seamless operation for both users and administrators.
+
+To ensure maintainability and scalability, the system incorporates **design patterns**:
+
+- **Singleton**: Ensures that certain classes (e.g., `BancoUsuarios`) have only one instance, centralizing user and system data management.
+- **Proxy**: Provides controlled access to sensitive or restricted operations, improving security and modularity.
+- **Factory**: Simplifies the creation of librarian objects using the `BibliotecarioFactory` class, adhering to the principle of abstraction.
+
+These patterns contribute to cleaner, more maintainable code while promoting good object-oriented design practices.
+
 
 ---
 
